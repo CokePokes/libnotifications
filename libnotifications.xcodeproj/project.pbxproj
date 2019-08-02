@@ -1,0 +1,356 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B56F73D022F43BA6004E453F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B56F73CF22F43BA6004E453F /* Foundation.framework */; };
+		B56F73D822F43BA6004E453F /* libnotifications.mm in Sources */ = {isa = PBXBuildFile; fileRef = B56F73D722F43BA6004E453F /* libnotifications.mm */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B56F73CC22F43BA6004E453F /* libnotifications.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libnotifications.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		B56F73CF22F43BA6004E453F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B56F73D422F43BA6004E453F /* control */ = {isa = PBXFileReference; lastKnownFileType = text; name = control; path = Package/DEBIAN/control; sourceTree = "<group>"; };
+		B56F73D622F43BA6004E453F /* libnotifications-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "libnotifications-Prefix.pch"; sourceTree = "<group>"; };
+		B56F73D722F43BA6004E453F /* libnotifications.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = libnotifications.mm; sourceTree = "<group>"; };
+		B56F73DC22F43BA6004E453F /* libnotifications.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = libnotifications.plist; path = Package/Library/MobileSubstrate/DynamicLibraries/libnotifications.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B56F73C822F43BA6004E453F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B56F73D022F43BA6004E453F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B56F73C222F43BA6004E453F = {
+			isa = PBXGroup;
+			children = (
+				B56F73D122F43BA6004E453F /* libnotifications */,
+				B56F73CE22F43BA6004E453F /* Frameworks */,
+				B56F73CD22F43BA6004E453F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B56F73CD22F43BA6004E453F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B56F73CC22F43BA6004E453F /* libnotifications.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B56F73CE22F43BA6004E453F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B56F73CF22F43BA6004E453F /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B56F73D122F43BA6004E453F /* libnotifications */ = {
+			isa = PBXGroup;
+			children = (
+				B56F73D722F43BA6004E453F /* libnotifications.mm */,
+				B56F73D222F43BA6004E453F /* Package */,
+				B56F73D522F43BA6004E453F /* Supporting Files */,
+			);
+			path = libnotifications;
+			sourceTree = "<group>";
+		};
+		B56F73D222F43BA6004E453F /* Package */ = {
+			isa = PBXGroup;
+			children = (
+				B56F73D322F43BA6004E453F /* DEBIAN */,
+				B56F73D922F43BA6004E453F /* Library */,
+			);
+			name = Package;
+			sourceTree = "<group>";
+		};
+		B56F73D322F43BA6004E453F /* DEBIAN */ = {
+			isa = PBXGroup;
+			children = (
+				B56F73D422F43BA6004E453F /* control */,
+			);
+			name = DEBIAN;
+			sourceTree = "<group>";
+		};
+		B56F73D522F43BA6004E453F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B56F73D622F43BA6004E453F /* libnotifications-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B56F73D922F43BA6004E453F /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				B56F73DA22F43BA6004E453F /* MobileSubstrate */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		B56F73DA22F43BA6004E453F /* MobileSubstrate */ = {
+			isa = PBXGroup;
+			children = (
+				B56F73DB22F43BA6004E453F /* DynamicLibraries */,
+			);
+			name = MobileSubstrate;
+			sourceTree = "<group>";
+		};
+		B56F73DB22F43BA6004E453F /* DynamicLibraries */ = {
+			isa = PBXGroup;
+			children = (
+				B56F73DC22F43BA6004E453F /* libnotifications.plist */,
+			);
+			name = DynamicLibraries;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		B56F73C922F43BA6004E453F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		B56F73CB22F43BA6004E453F /* libnotifications */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B56F73DF22F43BA6004E453F /* Build configuration list for PBXNativeTarget "libnotifications" */;
+			buildPhases = (
+				B56F73C722F43BA6004E453F /* Sources */,
+				B56F73C822F43BA6004E453F /* Frameworks */,
+				B56F73C922F43BA6004E453F /* Headers */,
+				B56F73CA22F43BA6004E453F /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = libnotifications;
+			productName = libnotifications;
+			productReference = B56F73CC22F43BA6004E453F /* libnotifications.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B56F73C322F43BA6004E453F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1020;
+				TargetAttributes = {
+					B56F73CB22F43BA6004E453F = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+				};
+			};
+			buildConfigurationList = B56F73C622F43BA6004E453F /* Build configuration list for PBXProject "libnotifications" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = B56F73C222F43BA6004E453F;
+			productRefGroup = B56F73CD22F43BA6004E453F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B56F73CB22F43BA6004E453F /* libnotifications */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B56F73CA22F43BA6004E453F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/opt/MonkeyDev/bin/md --xcbp";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B56F73C722F43BA6004E453F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B56F73D822F43BA6004E453F /* libnotifications.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		B56F73DD22F43BA6004E453F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(MonkeyDevPath)/frameworks/**",
+					"$(MonkeyDevTheosPath)/vendor/lib",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(MonkeyDevTheosPath)/vendor/include/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LIBRARY_SEARCH_PATHS = "$(MonkeyDevTheosPath)/vendor/lib/**";
+				MonkeyDevPath = /opt/MonkeyDev;
+				MonkeyDevTheosPath = /opt/theos;
+				OTHER_CFLAGS = "-DTHEOS_INSTANCE_NAME=\"\\\"libnotifications\\\"\"";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B56F73DE22F43BA6004E453F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(MonkeyDevPath)/frameworks/**",
+					"$(MonkeyDevTheosPath)/vendor/lib",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(MonkeyDevTheosPath)/vendor/include/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LIBRARY_SEARCH_PATHS = "$(MonkeyDevTheosPath)/vendor/lib/**";
+				MonkeyDevPath = /opt/MonkeyDev;
+				MonkeyDevTheosPath = /opt/theos;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "-DTHEOS_INSTANCE_NAME=\"\\\"libnotifications\\\"\"";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = NO;
+			};
+			name = Debug;
+		};
+		B56F73E022F43BA6004E453F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AUYLZA5X3V;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "libnotifications/libnotifications-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(MonkeyDevPath)/include",
+					"$(MonkeyDevTheosPath)/vendor/include/**",
+				);
+				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				MonkeyDevBuildPackageOnAnyBuild = NO;
+				MonkeyDevClearUiCacheOnInstall = NO;
+				MonkeyDevCopyOnBuild = NO;
+				MonkeyDevDeviceIP = "";
+				MonkeyDevDevicePassword = "";
+				MonkeyDevDevicePort = "";
+				MonkeyDevInstallOnAnyBuild = YES;
+				MonkeyDevInstallOnProfiling = YES;
+				MonkeyDevkillProcessOnInstall = SpringBoard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B56F73E122F43BA6004E453F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AUYLZA5X3V;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "libnotifications/libnotifications-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(MonkeyDevPath)/include",
+					"$(MonkeyDevTheosPath)/vendor/include/**",
+				);
+				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				MonkeyDevBuildPackageOnAnyBuild = NO;
+				MonkeyDevClearUiCacheOnInstall = NO;
+				MonkeyDevCopyOnBuild = NO;
+				MonkeyDevDeviceIP = "";
+				MonkeyDevDevicePassword = "";
+				MonkeyDevDevicePort = "";
+				MonkeyDevInstallOnAnyBuild = YES;
+				MonkeyDevInstallOnProfiling = YES;
+				MonkeyDevkillProcessOnInstall = SpringBoard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B56F73C622F43BA6004E453F /* Build configuration list for PBXProject "libnotifications" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B56F73DD22F43BA6004E453F /* Release */,
+				B56F73DE22F43BA6004E453F /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B56F73DF22F43BA6004E453F /* Build configuration list for PBXNativeTarget "libnotifications" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B56F73E022F43BA6004E453F /* Release */,
+				B56F73E122F43BA6004E453F /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B56F73C322F43BA6004E453F /* Project object */;
+}

@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'libnotifications' target in the 'libnotifications' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+#endif
