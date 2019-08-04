@@ -16,78 +16,68 @@
 #import <Foundation/Foundation.h>
 #import "CaptainHook/CaptainHook.h"
 #include <notify.h> // not required; for examples only
+#include <xpc/xpc.h>
 
-// Objective-C runtime hooking using CaptainHook:
-//   1. declare class using CHDeclareClass()
-//   2. load class using CHLoadClass() or CHLoadLateClass() in CHConstructor
-//   3. hook method using CHOptimizedMethod()
-//   4. register hook using CHHook() in CHConstructor
-//   5. (optionally) call old method using CHSuper()
+#import "NSDictionary+CDXPC.h"
 
+#define CPLog(fmt, ...) NSLog((@"\e[4#1mCPNotification\e[m \E[3#2m[Line %d]:\e[m " fmt), __LINE__, ##__VA_ARGS__);
 
-@interface libnotifications : NSObject
+static NSString * toBase64String(NSString *string) {
+    NSData *dataToEncode = [string dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *encodedData = [dataToEncode base64EncodedDataWithOptions:0];
+    NSString *encodedString = [[NSString alloc] initWithData:encodedData encoding:NSUTF8StringEncoding];
+    return encodedString;
+}
 
+static NSString * fromBase64String(NSString *string) {
+    NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:string options:0];
+    NSString *decodedString = [[NSString alloc] initWithData:decodedData encoding:NSUTF8StringEncoding];
+    return decodedString;
+}
+
+@interface NSTask : NSObject
++ (NSTask *)launchedTaskWithLaunchPath:(NSString *)path arguments:(NSArray *)arguments;
 @end
 
-@implementation libnotifications
+@interface CPNotification : NSObject
++ (void)showAlertWithTitle:(NSString*)title message:(NSString*)message userInfo:(NSDictionary*)userInfo bundleId:(nonnull NSString*)bundleId;
+@end
 
--(id)init
-{
-	if ((self = [super init]))
-	{
-	}
+@implementation CPNotification
 
+-(id)init {
+	if ((self = [super init])){}
     return self;
 }
 
++ (void)showAlertWithTitle:(NSString*)title message:(NSString*)message userInfo:(NSDictionary*)userInfo bundleId:(nonnull NSString*)bundleId {
+    
+    NSMutableDictionary *constructedDic = [NSMutableDictionary dictionary];
+    
+    if (title)
+        [constructedDic setObject:title forKey:@"title"];
+    
+    if (message)
+        [constructedDic setObject:message forKey:@"message"];
+    
+    if (userInfo)
+        [constructedDic setObject:userInfo forKey:@"userInfo"];
+
+    if (bundleId)
+        [constructedDic setObject:bundleId forKey:@"bundleId"];
+    else
+        return; //don't proceed. BundleId is required!
+    
+    xpc_connection_t client = xpc_connection_create_mach_service("com.cokepokes.libnotificationd",
+                                                                 NULL,
+                                                                 0);
+    xpc_connection_set_event_handler(client, ^(xpc_object_t event) {
+        CPLog(@"ERROR: xpc_connection_set_event_handler");
+    });
+    xpc_connection_resume(client);
+    //xpc_object_t reply = xpc_connection_send_message_with_reply_sync(client, dictToSend.XPCObject); //could set up a completion with this
+    xpc_connection_send_message(client, [(NSDictionary*)constructedDic.copy XPCObject]);
+}
+
 @end
 
-
-@class ClassToHook;
-
-CHDeclareClass(ClassToHook); // declare class
-
-CHOptimizedMethod(0, self, void, ClassToHook, messageName) // hook method (with no arguments and no return value)
-{
-	// write code here ...
-	
-	CHSuper(0, ClassToHook, messageName); // call old (original) method
-}
-
-CHOptimizedMethod(2, self, BOOL, ClassToHook, arg1, NSString*, value1, arg2, BOOL, value2) // hook method (with 2 arguments and a return value)
-{
-	// write code here ...
-
-	return CHSuper(2, ClassToHook, arg1, value1, arg2, value2); // call old (original) method and return its return value
-}
-
-static void WillEnterForeground(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo)
-{
-	// not required; for example only
-}
-
-static void ExternallyPostedNotification(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo)
-{
-	// not required; for example only
-}
-
-CHConstructor // code block that runs immediately upon load
-{
-	@autoreleasepool
-	{
-		// listen for local notification (not required; for example only)
-		CFNotificationCenterRef center = CFNotificationCenterGetLocalCenter();
-		CFNotificationCenterAddObserver(center, NULL, WillEnterForeground, CFSTR("UIApplicationWillEnterForegroundNotification"), NULL, CFNotificationSuspensionBehaviorCoalesce);
-		
-		// listen for system-side notification (not required; for example only)
-		// this would be posted using: notify_post("com.cokepokes.libnotifications.eventname");
-		CFNotificationCenterRef darwin = CFNotificationCenterGetDarwinNotifyCenter();
-		CFNotificationCenterAddObserver(darwin, NULL, ExternallyPostedNotification, CFSTR("com.cokepokes.libnotifications.eventname"), NULL, CFNotificationSuspensionBehaviorCoalesce);
-		
-		// CHLoadClass(ClassToHook); // load class (that is "available now")
-		// CHLoadLateClass(ClassToHook);  // load class (that will be "available later")
-		
-		CHHook(0, ClassToHook, messageName); // register hook
-		CHHook(2, ClassToHook, arg1, arg2); // register hook
-	}
-}

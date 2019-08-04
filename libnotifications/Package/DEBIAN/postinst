@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if [[ $1 == upgrade ]]; then
+	/bin/launchctl unload /Library/LaunchDaemons/com.cokepokes.libnotificationd.plist
+fi
+
+chown root:wheel /usr/libexec/libnotificationd
+chmod 755 /usr/libexec/libnotificationd
+chown root:wheel /Library/LaunchDaemons/com.cokepokes.libnotificationd.plist
+chmod 644 /Library/LaunchDaemons/com.cokepokes.libnotificationd.plist
+
+/bin/launchctl load /Library/LaunchDaemons/com.cokepokes.libnotificationd.plist
+
+exit 0

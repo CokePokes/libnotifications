@@ -9,6 +9,32 @@
 /* Begin PBXBuildFile section */
 		B56F73D022F43BA6004E453F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B56F73CF22F43BA6004E453F /* Foundation.framework */; };
 		B56F73D822F43BA6004E453F /* libnotifications.mm in Sources */ = {isa = PBXBuildFile; fileRef = B56F73D722F43BA6004E453F /* libnotifications.mm */; };
+		B56F746822F5A7AA004E453F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B56F73CF22F43BA6004E453F /* Foundation.framework */; };
+		B56F747222F5A7AA004E453F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F747122F5A7AA004E453F /* main.m */; };
+		B56F74B522F6E1CD004E453F /* NSDictionary+CDXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F74A522F6E1CC004E453F /* NSDictionary+CDXPC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-objc-designated-initializers"; }; };
+		B56F74B622F6E1CD004E453F /* NSDictionary+CDXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F74A522F6E1CC004E453F /* NSDictionary+CDXPC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-objc-designated-initializers"; }; };
+		B56F74B722F6E1CD004E453F /* NSData+CDXPC.h in Headers */ = {isa = PBXBuildFile; fileRef = B56F74A622F6E1CC004E453F /* NSData+CDXPC.h */; };
+		B56F74B822F6E1CD004E453F /* NSNull+CDXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F74A722F6E1CC004E453F /* NSNull+CDXPC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-objc-designated-initializers"; }; };
+		B56F74B922F6E1CD004E453F /* NSNull+CDXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F74A722F6E1CC004E453F /* NSNull+CDXPC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-objc-designated-initializers"; }; };
+		B56F74BA22F6E1CD004E453F /* NSString+CDXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F74A822F6E1CC004E453F /* NSString+CDXPC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-objc-designated-initializers"; }; };
+		B56F74BB22F6E1CD004E453F /* NSString+CDXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F74A822F6E1CC004E453F /* NSString+CDXPC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-objc-designated-initializers"; }; };
+		B56F74BC22F6E1CD004E453F /* NSDate+CDXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F74A922F6E1CD004E453F /* NSDate+CDXPC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-objc-designated-initializers"; }; };
+		B56F74BD22F6E1CD004E453F /* NSDate+CDXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F74A922F6E1CD004E453F /* NSDate+CDXPC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-objc-designated-initializers"; }; };
+		B56F74BE22F6E1CD004E453F /* NSNumber+CDXPC.h in Headers */ = {isa = PBXBuildFile; fileRef = B56F74AA22F6E1CD004E453F /* NSNumber+CDXPC.h */; };
+		B56F74BF22F6E1CD004E453F /* ObjectToXPC.h in Headers */ = {isa = PBXBuildFile; fileRef = B56F74AB22F6E1CD004E453F /* ObjectToXPC.h */; };
+		B56F74C022F6E1CD004E453F /* NSArray+CDXPC.h in Headers */ = {isa = PBXBuildFile; fileRef = B56F74AC22F6E1CD004E453F /* NSArray+CDXPC.h */; };
+		B56F74C122F6E1CD004E453F /* NSData+CDXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F74AD22F6E1CD004E453F /* NSData+CDXPC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-objc-designated-initializers"; }; };
+		B56F74C222F6E1CD004E453F /* NSData+CDXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F74AD22F6E1CD004E453F /* NSData+CDXPC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-objc-designated-initializers"; }; };
+		B56F74C322F6E1CD004E453F /* NSDictionary+CDXPC.h in Headers */ = {isa = PBXBuildFile; fileRef = B56F74AE22F6E1CD004E453F /* NSDictionary+CDXPC.h */; };
+		B56F74C522F6E1CD004E453F /* NSString+CDXPC.h in Headers */ = {isa = PBXBuildFile; fileRef = B56F74B022F6E1CD004E453F /* NSString+CDXPC.h */; };
+		B56F74C622F6E1CD004E453F /* NSNull+CDXPC.h in Headers */ = {isa = PBXBuildFile; fileRef = B56F74B122F6E1CD004E453F /* NSNull+CDXPC.h */; };
+		B56F74C722F6E1CD004E453F /* NSDate+CDXPC.h in Headers */ = {isa = PBXBuildFile; fileRef = B56F74B222F6E1CD004E453F /* NSDate+CDXPC.h */; };
+		B56F74C822F6E1CD004E453F /* NSArray+CDXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F74B322F6E1CD004E453F /* NSArray+CDXPC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-objc-designated-initializers"; }; };
+		B56F74C922F6E1CD004E453F /* NSArray+CDXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F74B322F6E1CD004E453F /* NSArray+CDXPC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-objc-designated-initializers"; }; };
+		B56F74CA22F6E1CD004E453F /* NSNumber+CDXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F74B422F6E1CD004E453F /* NSNumber+CDXPC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-objc-designated-initializers"; }; };
+		B56F74CB22F6E1CD004E453F /* NSNumber+CDXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F74B422F6E1CD004E453F /* NSNumber+CDXPC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-objc-designated-initializers"; }; };
+		B56F74CC22F6E5B2004E453F /* SpringBoardServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B56F73F722F455B5004E453F /* SpringBoardServices.framework */; };
+		B56F74CE22F702ED004E453F /* ObjectToXPC-Private.h in Headers */ = {isa = PBXBuildFile; fileRef = B56F74CD22F702ED004E453F /* ObjectToXPC-Private.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +44,38 @@
 		B56F73D622F43BA6004E453F /* libnotifications-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "libnotifications-Prefix.pch"; sourceTree = "<group>"; };
 		B56F73D722F43BA6004E453F /* libnotifications.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = libnotifications.mm; sourceTree = "<group>"; };
 		B56F73DC22F43BA6004E453F /* libnotifications.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = libnotifications.plist; path = Package/Library/MobileSubstrate/DynamicLibraries/libnotifications.plist; sourceTree = "<group>"; };
+		B56F73F722F455B5004E453F /* SpringBoardServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpringBoardServices.framework; path = ../../../../../opt/theos/vendor/lib/SpringBoardServices.framework; sourceTree = "<group>"; };
+		B56F73F922F498AD004E453F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		B56F745722F5A664004E453F /* control */ = {isa = PBXFileReference; lastKnownFileType = text; name = control; path = Package/DEBIAN/control; sourceTree = "<group>"; };
+		B56F745822F5A664004E453F /* monkeydev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = monkeydev.entitlements; sourceTree = "<group>"; };
+		B56F745B22F5A664004E453F /* 0xdeadfa11 */ = {isa = PBXFileReference; lastKnownFileType = text; name = 0xdeadfa11; path = Package/usr/bin/0xdeadfa11; sourceTree = "<group>"; };
+		B56F745C22F5A664004E453F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B56F745F22F5A664004E453F /* libnotificationd-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "libnotificationd-Prefix.pch"; sourceTree = "<group>"; };
+		B56F746722F5A7A9004E453F /* libnotificationd */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = libnotificationd; sourceTree = BUILT_PRODUCTS_DIR; };
+		B56F746C22F5A7AA004E453F /* control */ = {isa = PBXFileReference; lastKnownFileType = text; name = control; path = Package/DEBIAN/control; sourceTree = "<group>"; };
+		B56F746D22F5A7AA004E453F /* monkeydev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = monkeydev.entitlements; sourceTree = "<group>"; };
+		B56F747022F5A7AA004E453F /* 0xdeadfa11 */ = {isa = PBXFileReference; lastKnownFileType = text; name = 0xdeadfa11; path = Package/usr/bin/0xdeadfa11; sourceTree = "<group>"; };
+		B56F747122F5A7AA004E453F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B56F747422F5A7AA004E453F /* libnotificationd-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "libnotificationd-Prefix.pch"; sourceTree = "<group>"; };
+		B56F747822F5A866004E453F /* prerm */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = prerm; path = Package/DEBIAN/prerm; sourceTree = "<group>"; };
+		B56F747922F5A866004E453F /* postinst */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = postinst; path = Package/DEBIAN/postinst; sourceTree = "<group>"; };
+		B56F747C22F5A8BD004E453F /* com.cokepokes.libnotificationd.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = com.cokepokes.libnotificationd.plist; sourceTree = "<group>"; };
+		B56F74A522F6E1CC004E453F /* NSDictionary+CDXPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+CDXPC.m"; sourceTree = "<group>"; };
+		B56F74A622F6E1CC004E453F /* NSData+CDXPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+CDXPC.h"; sourceTree = "<group>"; };
+		B56F74A722F6E1CC004E453F /* NSNull+CDXPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+CDXPC.m"; sourceTree = "<group>"; };
+		B56F74A822F6E1CC004E453F /* NSString+CDXPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CDXPC.m"; sourceTree = "<group>"; };
+		B56F74A922F6E1CD004E453F /* NSDate+CDXPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+CDXPC.m"; sourceTree = "<group>"; };
+		B56F74AA22F6E1CD004E453F /* NSNumber+CDXPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+CDXPC.h"; sourceTree = "<group>"; };
+		B56F74AB22F6E1CD004E453F /* ObjectToXPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectToXPC.h; sourceTree = "<group>"; };
+		B56F74AC22F6E1CD004E453F /* NSArray+CDXPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+CDXPC.h"; sourceTree = "<group>"; };
+		B56F74AD22F6E1CD004E453F /* NSData+CDXPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+CDXPC.m"; sourceTree = "<group>"; };
+		B56F74AE22F6E1CD004E453F /* NSDictionary+CDXPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+CDXPC.h"; sourceTree = "<group>"; };
+		B56F74B022F6E1CD004E453F /* NSString+CDXPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CDXPC.h"; sourceTree = "<group>"; };
+		B56F74B122F6E1CD004E453F /* NSNull+CDXPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNull+CDXPC.h"; sourceTree = "<group>"; };
+		B56F74B222F6E1CD004E453F /* NSDate+CDXPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+CDXPC.h"; sourceTree = "<group>"; };
+		B56F74B322F6E1CD004E453F /* NSArray+CDXPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+CDXPC.m"; sourceTree = "<group>"; };
+		B56F74B422F6E1CD004E453F /* NSNumber+CDXPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+CDXPC.m"; sourceTree = "<group>"; };
+		B56F74CD22F702ED004E453F /* ObjectToXPC-Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ObjectToXPC-Private.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,13 +87,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B56F746422F5A7A9004E453F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B56F74CC22F6E5B2004E453F /* SpringBoardServices.framework in Frameworks */,
+				B56F746822F5A7AA004E453F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		B56F73C222F43BA6004E453F = {
 			isa = PBXGroup;
 			children = (
+				B56F74A422F6E1CC004E453F /* ObjectToXPC */,
 				B56F73D122F43BA6004E453F /* libnotifications */,
+				B56F745422F5A664004E453F /* libnotificationd */,
+				B56F746922F5A7AA004E453F /* libnotificationd */,
 				B56F73CE22F43BA6004E453F /* Frameworks */,
 				B56F73CD22F43BA6004E453F /* Products */,
 			);
@@ -45,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				B56F73CC22F43BA6004E453F /* libnotifications.dylib */,
+				B56F746722F5A7A9004E453F /* libnotificationd */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -52,6 +123,8 @@
 		B56F73CE22F43BA6004E453F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B56F73F922F498AD004E453F /* UIKit.framework */,
+				B56F73F722F455B5004E453F /* SpringBoardServices.framework */,
 				B56F73CF22F43BA6004E453F /* Foundation.framework */,
 			);
 			name = Frameworks;
@@ -79,6 +152,8 @@
 		B56F73D322F43BA6004E453F /* DEBIAN */ = {
 			isa = PBXGroup;
 			children = (
+				B56F747922F5A866004E453F /* postinst */,
+				B56F747822F5A866004E453F /* prerm */,
 				B56F73D422F43BA6004E453F /* control */,
 			);
 			name = DEBIAN;
@@ -95,6 +170,7 @@
 		B56F73D922F43BA6004E453F /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				B56F747B22F5A8BD004E453F /* LaunchDaemons */,
 				B56F73DA22F43BA6004E453F /* MobileSubstrate */,
 			);
 			name = Library;
@@ -116,6 +192,143 @@
 			name = DynamicLibraries;
 			sourceTree = "<group>";
 		};
+		B56F745422F5A664004E453F /* libnotificationd */ = {
+			isa = PBXGroup;
+			children = (
+				B56F745822F5A664004E453F /* monkeydev.entitlements */,
+				B56F745C22F5A664004E453F /* main.m */,
+				B56F745522F5A664004E453F /* Package */,
+				B56F745E22F5A664004E453F /* Supporting Files */,
+			);
+			path = libnotificationd;
+			sourceTree = "<group>";
+		};
+		B56F745522F5A664004E453F /* Package */ = {
+			isa = PBXGroup;
+			children = (
+				B56F745622F5A664004E453F /* DEBIAN */,
+				B56F745922F5A664004E453F /* usr */,
+			);
+			name = Package;
+			sourceTree = "<group>";
+		};
+		B56F745622F5A664004E453F /* DEBIAN */ = {
+			isa = PBXGroup;
+			children = (
+				B56F745722F5A664004E453F /* control */,
+			);
+			name = DEBIAN;
+			sourceTree = "<group>";
+		};
+		B56F745922F5A664004E453F /* usr */ = {
+			isa = PBXGroup;
+			children = (
+				B56F745A22F5A664004E453F /* bin */,
+			);
+			name = usr;
+			sourceTree = "<group>";
+		};
+		B56F745A22F5A664004E453F /* bin */ = {
+			isa = PBXGroup;
+			children = (
+				B56F745B22F5A664004E453F /* 0xdeadfa11 */,
+			);
+			name = bin;
+			sourceTree = "<group>";
+		};
+		B56F745E22F5A664004E453F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B56F745F22F5A664004E453F /* libnotificationd-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B56F746922F5A7AA004E453F /* libnotificationd */ = {
+			isa = PBXGroup;
+			children = (
+				B56F746D22F5A7AA004E453F /* monkeydev.entitlements */,
+				B56F747122F5A7AA004E453F /* main.m */,
+				B56F746A22F5A7AA004E453F /* Package */,
+				B56F747322F5A7AA004E453F /* Supporting Files */,
+			);
+			path = libnotificationd;
+			sourceTree = "<group>";
+		};
+		B56F746A22F5A7AA004E453F /* Package */ = {
+			isa = PBXGroup;
+			children = (
+				B56F746B22F5A7AA004E453F /* DEBIAN */,
+				B56F746E22F5A7AA004E453F /* usr */,
+			);
+			name = Package;
+			sourceTree = "<group>";
+		};
+		B56F746B22F5A7AA004E453F /* DEBIAN */ = {
+			isa = PBXGroup;
+			children = (
+				B56F746C22F5A7AA004E453F /* control */,
+			);
+			name = DEBIAN;
+			sourceTree = "<group>";
+		};
+		B56F746E22F5A7AA004E453F /* usr */ = {
+			isa = PBXGroup;
+			children = (
+				B56F746F22F5A7AA004E453F /* bin */,
+			);
+			name = usr;
+			sourceTree = "<group>";
+		};
+		B56F746F22F5A7AA004E453F /* bin */ = {
+			isa = PBXGroup;
+			children = (
+				B56F747022F5A7AA004E453F /* 0xdeadfa11 */,
+			);
+			name = bin;
+			sourceTree = "<group>";
+		};
+		B56F747322F5A7AA004E453F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B56F747422F5A7AA004E453F /* libnotificationd-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B56F747B22F5A8BD004E453F /* LaunchDaemons */ = {
+			isa = PBXGroup;
+			children = (
+				B56F747C22F5A8BD004E453F /* com.cokepokes.libnotificationd.plist */,
+			);
+			name = LaunchDaemons;
+			path = Package/Library/LaunchDaemons;
+			sourceTree = "<group>";
+		};
+		B56F74A422F6E1CC004E453F /* ObjectToXPC */ = {
+			isa = PBXGroup;
+			children = (
+				B56F74AC22F6E1CD004E453F /* NSArray+CDXPC.h */,
+				B56F74B322F6E1CD004E453F /* NSArray+CDXPC.m */,
+				B56F74A622F6E1CC004E453F /* NSData+CDXPC.h */,
+				B56F74AD22F6E1CD004E453F /* NSData+CDXPC.m */,
+				B56F74B222F6E1CD004E453F /* NSDate+CDXPC.h */,
+				B56F74A922F6E1CD004E453F /* NSDate+CDXPC.m */,
+				B56F74AE22F6E1CD004E453F /* NSDictionary+CDXPC.h */,
+				B56F74A522F6E1CC004E453F /* NSDictionary+CDXPC.m */,
+				B56F74B122F6E1CD004E453F /* NSNull+CDXPC.h */,
+				B56F74A722F6E1CC004E453F /* NSNull+CDXPC.m */,
+				B56F74AA22F6E1CD004E453F /* NSNumber+CDXPC.h */,
+				B56F74B422F6E1CD004E453F /* NSNumber+CDXPC.m */,
+				B56F74B022F6E1CD004E453F /* NSString+CDXPC.h */,
+				B56F74A822F6E1CC004E453F /* NSString+CDXPC.m */,
+				B56F74AB22F6E1CD004E453F /* ObjectToXPC.h */,
+				B56F74CD22F702ED004E453F /* ObjectToXPC-Private.h */,
+			);
+			name = ObjectToXPC;
+			path = libnotifications/ObjectToXPC;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -123,6 +336,15 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B56F74B722F6E1CD004E453F /* NSData+CDXPC.h in Headers */,
+				B56F74BF22F6E1CD004E453F /* ObjectToXPC.h in Headers */,
+				B56F74C022F6E1CD004E453F /* NSArray+CDXPC.h in Headers */,
+				B56F74C522F6E1CD004E453F /* NSString+CDXPC.h in Headers */,
+				B56F74CE22F702ED004E453F /* ObjectToXPC-Private.h in Headers */,
+				B56F74C722F6E1CD004E453F /* NSDate+CDXPC.h in Headers */,
+				B56F74C322F6E1CD004E453F /* NSDictionary+CDXPC.h in Headers */,
+				B56F74C622F6E1CD004E453F /* NSNull+CDXPC.h in Headers */,
+				B56F74BE22F6E1CD004E453F /* NSNumber+CDXPC.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,6 +369,23 @@
 			productReference = B56F73CC22F43BA6004E453F /* libnotifications.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
+		B56F746622F5A7A9004E453F /* libnotificationd */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B56F747522F5A7AA004E453F /* Build configuration list for PBXNativeTarget "libnotificationd" */;
+			buildPhases = (
+				B56F746322F5A7A9004E453F /* Sources */,
+				B56F746422F5A7A9004E453F /* Frameworks */,
+				B56F746522F5A7A9004E453F /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = libnotificationd;
+			productName = libnotificationd;
+			productReference = B56F746722F5A7A9004E453F /* libnotificationd */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -156,6 +395,9 @@
 				LastUpgradeCheck = 1020;
 				TargetAttributes = {
 					B56F73CB22F43BA6004E453F = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+					B56F746622F5A7A9004E453F = {
 						CreatedOnToolsVersion = 10.2.1;
 					};
 				};
@@ -173,6 +415,7 @@
 			projectRoot = "";
 			targets = (
 				B56F73CB22F43BA6004E453F /* libnotifications */,
+				B56F746622F5A7A9004E453F /* libnotificationd */,
 			);
 		};
 /* End PBXProject section */
@@ -193,7 +436,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/opt/MonkeyDev/bin/md --xcbp";
+			shellScript = "ldid -S \"$BUILT_PRODUCTS_DIR/$EXECUTABLE_NAME\"\n/opt/MonkeyDev/bin/md --xcbp\n";
+		};
+		B56F746522F5A7A9004E453F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "ldid -S\"$SRCROOT/libnotificationd/monkeydev.entitlements\" \"$BUILT_PRODUCTS_DIR/$EXECUTABLE_NAME\"\ncp \"$BUILT_PRODUCTS_DIR/$EXECUTABLE_NAME\" \"$SRCROOT/libnotifications/Package/usr/libexec/$EXECUTABLE_NAME\"\n\n\n#/opt/MonkeyDev/bin/md --xcbp\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -202,7 +462,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B56F74BA22F6E1CD004E453F /* NSString+CDXPC.m in Sources */,
+				B56F74C122F6E1CD004E453F /* NSData+CDXPC.m in Sources */,
+				B56F74CA22F6E1CD004E453F /* NSNumber+CDXPC.m in Sources */,
 				B56F73D822F43BA6004E453F /* libnotifications.mm in Sources */,
+				B56F74B822F6E1CD004E453F /* NSNull+CDXPC.m in Sources */,
+				B56F74B522F6E1CD004E453F /* NSDictionary+CDXPC.m in Sources */,
+				B56F74C822F6E1CD004E453F /* NSArray+CDXPC.m in Sources */,
+				B56F74BC22F6E1CD004E453F /* NSDate+CDXPC.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B56F746322F5A7A9004E453F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B56F74BB22F6E1CD004E453F /* NSString+CDXPC.m in Sources */,
+				B56F74C222F6E1CD004E453F /* NSData+CDXPC.m in Sources */,
+				B56F74CB22F6E1CD004E453F /* NSNumber+CDXPC.m in Sources */,
+				B56F747222F5A7AA004E453F /* main.m in Sources */,
+				B56F74B922F6E1CD004E453F /* NSNull+CDXPC.m in Sources */,
+				B56F74B622F6E1CD004E453F /* NSDictionary+CDXPC.m in Sources */,
+				B56F74C922F6E1CD004E453F /* NSArray+CDXPC.m in Sources */,
+				B56F74BD22F6E1CD004E453F /* NSDate+CDXPC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,7 +494,13 @@
 		B56F73DD22F43BA6004E453F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					armv7,
+					armv7s,
+					arm64,
+					arm64e,
+				);
 				COPY_PHASE_STRIP = YES;
 				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -238,7 +526,13 @@
 		B56F73DE22F43BA6004E453F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					armv7,
+					armv7s,
+					arm64,
+					arm64e,
+				);
 				COPY_PHASE_STRIP = NO;
 				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -272,8 +566,9 @@
 		B56F73E022F43BA6004E453F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AUYLZA5X3V;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -284,17 +579,18 @@
 					"$(MonkeyDevPath)/include",
 					"$(MonkeyDevTheosPath)/vendor/include/**",
 				);
-				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
-				MonkeyDevBuildPackageOnAnyBuild = NO;
+				INSTALL_PATH = /usr/lib;
+				MonkeyDevBuildPackageOnAnyBuild = YES;
 				MonkeyDevClearUiCacheOnInstall = NO;
 				MonkeyDevCopyOnBuild = NO;
-				MonkeyDevDeviceIP = "";
+				MonkeyDevDeviceIP = 192.168.1.5;
 				MonkeyDevDevicePassword = "";
 				MonkeyDevDevicePort = "";
 				MonkeyDevInstallOnAnyBuild = YES;
 				MonkeyDevInstallOnProfiling = YES;
-				MonkeyDevkillProcessOnInstall = SpringBoard;
+				MonkeyDevkillProcessOnInstall = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -302,8 +598,9 @@
 		B56F73E122F43BA6004E453F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AUYLZA5X3V;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -314,16 +611,79 @@
 					"$(MonkeyDevPath)/include",
 					"$(MonkeyDevTheosPath)/vendor/include/**",
 				);
-				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
-				MonkeyDevBuildPackageOnAnyBuild = NO;
+				INSTALL_PATH = /usr/lib;
+				MonkeyDevBuildPackageOnAnyBuild = YES;
+				MonkeyDevClearUiCacheOnInstall = NO;
+				MonkeyDevCopyOnBuild = NO;
+				MonkeyDevDeviceIP = 192.168.1.5;
+				MonkeyDevDevicePassword = "";
+				MonkeyDevDevicePort = "";
+				MonkeyDevInstallOnAnyBuild = YES;
+				MonkeyDevInstallOnProfiling = YES;
+				MonkeyDevkillProcessOnInstall = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B56F747622F5A7AA004E453F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AUYLZA5X3V;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/theos/vendor/lib,
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "libnotificationd/libnotificationd-Prefix.pch";
+				INSTALL_PATH = /usr/libexec;
+				MonkeyDevBuildPackageOnAnyBuild = YES;
 				MonkeyDevClearUiCacheOnInstall = NO;
 				MonkeyDevCopyOnBuild = NO;
 				MonkeyDevDeviceIP = "";
 				MonkeyDevDevicePassword = "";
 				MonkeyDevDevicePort = "";
-				MonkeyDevInstallOnAnyBuild = YES;
-				MonkeyDevInstallOnProfiling = YES;
-				MonkeyDevkillProcessOnInstall = SpringBoard;
+				MonkeyDevInstallOnAnyBuild = NO;
+				MonkeyDevInstallOnProfiling = NO;
+				MonkeyDevkillProcessOnInstall = "";
+				OTHER_CFLAGS = "-DTHEOS_INSTANCE_NAME=\"\\\"libnotificationd\\\"\"";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B56F747722F5A7AA004E453F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AUYLZA5X3V;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/theos/vendor/lib,
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "libnotificationd/libnotificationd-Prefix.pch";
+				INSTALL_PATH = /usr/libexec;
+				MonkeyDevBuildPackageOnAnyBuild = YES;
+				MonkeyDevClearUiCacheOnInstall = NO;
+				MonkeyDevCopyOnBuild = NO;
+				MonkeyDevDeviceIP = "";
+				MonkeyDevDevicePassword = "";
+				MonkeyDevDevicePort = "";
+				MonkeyDevInstallOnAnyBuild = NO;
+				MonkeyDevInstallOnProfiling = NO;
+				MonkeyDevkillProcessOnInstall = "";
+				OTHER_CFLAGS = "-DTHEOS_INSTANCE_NAME=\"\\\"libnotificationd\\\"\"";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -346,6 +706,15 @@
 			buildConfigurations = (
 				B56F73E022F43BA6004E453F /* Release */,
 				B56F73E122F43BA6004E453F /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B56F747522F5A7AA004E453F /* Build configuration list for PBXNativeTarget "libnotificationd" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B56F747622F5A7AA004E453F /* Release */,
+				B56F747722F5A7AA004E453F /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

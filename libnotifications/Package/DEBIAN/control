@@ -1,9 +1,9 @@
 Package: com.cokepokes.libnotifications
 Name: libnotifications
 Version: 0.1-1
-Description: 
+Description: App notification library.
 Section: Tweaks
-Depends: firmware (>= 5.0), mobilesubstrate
+Depends: firmware (>= 10.0), mobilesubstrate
 Conflicts: 
 Replaces: 
 Priority: optional
@@ -12,6 +12,6 @@ Author: CokePokes
 dev: 
 Homepage: 
 Depiction: 
-Maintainer: 
+Maintainer: CokePokes
 Icon: 
 
