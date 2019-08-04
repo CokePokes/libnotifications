@@ -1,6 +1,8 @@
 # libnotifications
 App Notification Library for Jailbroken Devices
 
+`Requires iOS10+`
+
 How to use in your tweak:
 
 ```objc
