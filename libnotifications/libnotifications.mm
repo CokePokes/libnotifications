@@ -40,7 +40,7 @@ static NSString * fromBase64String(NSString *string) {
 @end
 
 @interface CPNotification : NSObject
-+ (void)showAlertWithTitle:(NSString*)title message:(NSString*)message userInfo:(NSDictionary*)userInfo bundleId:(nonnull NSString*)bundleId;
++ (void)showAlertWithTitle:(NSString*)title message:(NSString*)message userInfo:(NSDictionary*)userInfo badgeCount:(int)badgeCount soundName:(NSString*)soundName delay:(double)delay repeats:(BOOL)repeats bundleId:(nonnull NSString*)bundleId;
 @end
 
 @implementation CPNotification
@@ -50,7 +50,7 @@ static NSString * fromBase64String(NSString *string) {
     return self;
 }
 
-+ (void)showAlertWithTitle:(NSString*)title message:(NSString*)message userInfo:(NSDictionary*)userInfo bundleId:(nonnull NSString*)bundleId {
++ (void)showAlertWithTitle:(NSString*)title message:(NSString*)message userInfo:(NSDictionary*)userInfo badgeCount:(int)badgeCount soundName:(NSString*)soundName delay:(double)delay repeats:(BOOL)repeats bundleId:(nonnull NSString*)bundleId {
     
     NSMutableDictionary *constructedDic = [NSMutableDictionary dictionary];
     
@@ -62,7 +62,19 @@ static NSString * fromBase64String(NSString *string) {
     
     if (userInfo)
         [constructedDic setObject:userInfo forKey:@"userInfo"];
+    
+    if (badgeCount)
+        [constructedDic setObject:[NSNumber numberWithInt:badgeCount] forKey:@"badgeCount"];
 
+    if (soundName)
+        [constructedDic setObject:soundName forKey:@"soundName"];
+    
+    if (delay)
+        [constructedDic setObject:[NSNumber numberWithDouble:delay] forKey:@"delay"];
+    
+    if (repeats)
+        [constructedDic setObject:[NSNumber numberWithBool:repeats] forKey:@"repeats"];
+    
     if (bundleId)
         [constructedDic setObject:bundleId forKey:@"bundleId"];
     else

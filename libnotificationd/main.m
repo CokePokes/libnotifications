@@ -32,22 +32,6 @@
 
 extern mach_port_t SBSSpringBoardServerPort();
 
-static NSString * fromBase64String(NSString *string) {
-    NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:string options:0];
-    NSString *decodedString = [[NSString alloc] initWithData:decodedData encoding:NSUTF8StringEncoding];
-    return decodedString;
-}
-
-static NSDictionary * dicFromDicString(NSString*string) {
-    NSError * err;
-    NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary * response;
-    if (data != nil){
-        response = (NSDictionary *)[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&err];
-    }
-    return response;
-}
-
 static void showNotificationWithXPCObject(xpc_object_t object) {
     
     NSDictionary *dic = [NSDictionary dictionaryWithXPCObject:object];
@@ -55,8 +39,13 @@ static void showNotificationWithXPCObject(xpc_object_t object) {
     NSString *title = [dic objectForKey:@"title"];
     NSString *message = [dic objectForKey:@"message"];
     NSDictionary *userInfo = [dic objectForKey:@"userInfo"];
+    NSNumber *badgeCount = [dic objectForKey:@"badgeCount"];
+    NSString *soundName = [dic objectForKey:@"soundName"];
     NSString *bundleId = [dic objectForKey:@"bundleId"];
-    
+    double delay = [[dic objectForKey:@"delay"] doubleValue];
+    BOOL repeats = [[dic objectForKey:@"repeats"] boolValue];
+
+
     BOOL shouldDelay = NO; //taken from CReporter
     mach_port_t port;
     while ((port = SBSSpringBoardServerPort()) == 0) {
@@ -92,13 +81,21 @@ static void showNotificationWithXPCObject(xpc_object_t object) {
                 objNotificationContent.title = title;
             if (message)
                 objNotificationContent.body = message;
-            objNotificationContent.sound = [objc_getClass("UNNotificationSound") defaultSound]; //make this an option maybe
+            if (soundName)
+                objNotificationContent.sound = [objc_getClass("UNNotificationSound") soundNamed:soundName];
+            else
+                objNotificationContent.sound = [objc_getClass("UNNotificationSound") defaultSound];
             if (userInfo)
                 objNotificationContent.userInfo = userInfo;
-            objNotificationContent.badge = [NSNumber numberWithInteger:1];
+            if (badgeCount)
+                objNotificationContent.badge = badgeCount;
+            if (!delay || delay == 0) // delay cannot be 0, framework will complain and crash
+                delay = 1.00;
+            if (delay < 60.00 && repeats)
+                delay = 60.00;
             
-            NSTimeInterval interval = 1.0; //make this an option maybe
-            UNTimeIntervalNotificationTrigger *trigger = [objc_getClass("UNTimeIntervalNotificationTrigger") triggerWithTimeInterval:interval repeats:NO];
+            NSTimeInterval interval = delay; //make this an option maybe
+            UNTimeIntervalNotificationTrigger *trigger = [objc_getClass("UNTimeIntervalNotificationTrigger") triggerWithTimeInterval:interval repeats:repeats];
             UNNotificationRequest *request = [objc_getClass("UNNotificationRequest") requestWithIdentifier:bundleId
                                                                                                    content:objNotificationContent trigger:trigger];
             [center addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {

@@ -1,6 +1,6 @@
 Package: com.cokepokes.libnotifications
 Name: libnotifications
-Version: 0.1-1
+Version: 0.2
 Description: App notification library.
 Section: Tweaks
 Depends: firmware (>= 10.0), mobilesubstrate
