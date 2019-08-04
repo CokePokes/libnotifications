@@ -13,7 +13,7 @@ How to use in your tweak:
 
 void *handle = dlopen("/usr/lib/libnotifications.dylib", RTLD_LAZY);
 if (handle != NULL) {                                            
-    [objc_getClass("CPNotification") showAlertWithTitle:@"Holy Shit"
+    [objc_getClass("CPNotification") showAlertWithTitle:@"Holy Smokes!"
                                                 message:@"This is the message!"
                                                userInfo:@{@"" : @""}
                                              badgeCount:1
