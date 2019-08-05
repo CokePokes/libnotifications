@@ -66,7 +66,7 @@ static void showNotificationWithXPCObject(xpc_object_t object) {
         void *usernotificationsHandle = dlopen("/System/Library/Frameworks/UserNotifications.framework/UserNotifications", RTLD_LAZY);
         if (usernotificationsHandle != NULL) {
             LSBundleProxy *bundleProxy = [objc_getClass("LSBundleProxy") bundleProxyForIdentifier:bundleId];
-            UNUserNotificationCenter *center = [[objc_getClass("UNUserNotificationCenter") alloc] initWithBundleProxy:bundleProxy];
+            UNUserNotificationCenter *center = [[objc_getClass("UNUserNotificationCenter") alloc] initWithBundleProxy:bundleProxy]; //currentUserNotificationSettings crashes
             
             [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error){
                 if(!error){
@@ -152,7 +152,7 @@ int main(int argc, const char *argv[])
                                                                   XPC_CONNECTION_MACH_SERVICE_LISTENER);
     
     if (!service) {
-        NSLog(@"Failed to create service.");
+        CPLog(@"ERROR: Failed to create service.");
         exit(EXIT_FAILURE);
     }
     
