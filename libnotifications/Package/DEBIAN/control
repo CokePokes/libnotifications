@@ -1,17 +1,17 @@
-Package: com.cokepokes.libnotifications
 Name: libnotifications
-Version: 0.2
-Description: App notification library.
-Section: Tweaks
-Depends: firmware (>= 10.0), mobilesubstrate
-Conflicts: 
-Replaces: 
+Package: com.cokepokes.libnotifications
 Priority: optional
+Depends: firmware (>= 8.0)
+Version: 0.2-2
 Architecture: iphoneos-arm
-Author: CokePokes
-dev: 
-Homepage: 
-Depiction: https://github.com/CokePokes/libnotifications
-Maintainer: CokePokes
-Icon: 
+Description: App notification library.
+Homepage: http://moreinfo.thebigboss.org/moreinfo/depiction.php?file=libnotificationsDp
+Depiction: http://moreinfo.thebigboss.org/moreinfo/depiction.php?file=libnotificationsDp
+Sponsor: thebigboss.org <http://thebigboss.org>
+Maintainer: BigBoss <bigboss@thebigboss.org>
+Author: CokePokes <cokepokes@gmail.com>
+Section: Development
+Tag: purpose::extension, compatible::ios8, compatible::ios9, compatible::ios10, compatible::ios11, compatible::ios12
+Installed-Size: 980
+dev: cokepokes
 
