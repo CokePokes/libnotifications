@@ -18,6 +18,13 @@
 #import <UserNotifications/UserNotifications.h>
 #import "NSDictionary+CDXPC.h"
 
+#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[objc_getClass("UIDevice") currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
+#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[objc_getClass("UIDevice") currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[objc_getClass("UIDevice") currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[objc_getClass("UIDevice") currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[objc_getClass("UIDevice") currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+
+
 #define CPLog(fmt, ...) NSLog((@"\e[4#1mlibnotificationd\e[m \E[3#2m[Line %d]:\e[m " fmt), __LINE__, ##__VA_ARGS__);
 
 @interface LSBundleProxy : NSObject <NSSecureCoding> {
@@ -29,6 +36,18 @@
 -(id)initWithBundleIdentifier:(id)arg1 ;
 -(id)initWithBundleProxy:(id)arg1 ;
 @end
+
+// Firmware < 9.0
+@interface SBSLocalNotificationClient : NSObject
++ (void)scheduleLocalNotification:(id)notification bundleIdentifier:(id)bundleIdentifier;
+@end
+
+// Firmware >= 9.0 < 10.0
+@interface UNSNotificationScheduler
+- (id)initWithBundleIdentifier:(NSString *)bundleIdentifier;
+- (void)addScheduledLocalNotifications:(NSArray *)notifications waitUntilDone:(BOOL)waitUntilDone;
+@end
+
 
 extern mach_port_t SBSSpringBoardServerPort();
 
@@ -63,6 +82,33 @@ static void showNotificationWithXPCObject(xpc_object_t object) {
     
     void *uikitHandle = dlopen("/System/Library/Frameworks/UIKit.framework/UIKit", RTLD_LAZY);
     if (uikitHandle != NULL) {
+        
+        UILocalNotification *notification = [objc_getClass("UILocalNotification") new];
+        [notification setAlertTitle:title];
+        [notification setAlertBody:message];
+        [notification setUserInfo:userInfo];
+        [notification setApplicationIconBadgeNumber:badgeCount.integerValue];
+        [notification setSoundName:soundName];
+        [notification setHasAction:YES];
+        [notification setAlertAction:nil];
+        
+        if ([objc_getClass("SBSLocalNotificationClient") respondsToSelector:@selector(scheduleLocalNotification:bundleIdentifier:)]) //less than iOS9
+        {
+            [objc_getClass("SBSLocalNotificationClient") scheduleLocalNotification:notification
+                                                                  bundleIdentifier:bundleId];
+            dlclose(uikitHandle); return;
+        }
+        
+        if (SYSTEM_VERSION_LESS_THAN(@"10.0")){ // iOS9 - 9.9
+            void *userNotiServicesHandle = dlopen("/System/Library/PrivateFrameworks/UserNotificationServices.framework/UserNotificationServices", RTLD_LAZY);
+            if (userNotiServicesHandle != NULL) {
+                UNSNotificationScheduler *scheduler = [[objc_getClass("UNSNotificationScheduler") alloc] initWithBundleIdentifier:bundleId];
+                [scheduler addScheduledLocalNotifications:@[notification] waitUntilDone:YES];
+                dlclose(userNotiServicesHandle);
+                dlclose(uikitHandle); return;
+            }
+        }
+        
         void *usernotificationsHandle = dlopen("/System/Library/Frameworks/UserNotifications.framework/UserNotifications", RTLD_LAZY);
         if (usernotificationsHandle != NULL) {
             LSBundleProxy *bundleProxy = [objc_getClass("LSBundleProxy") bundleProxyForIdentifier:bundleId];
