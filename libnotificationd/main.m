@@ -96,7 +96,7 @@ static void showNotificationWithXPCObject(xpc_object_t object) {
             
             NSTimeInterval interval = delay; //make this an option maybe
             UNTimeIntervalNotificationTrigger *trigger = [objc_getClass("UNTimeIntervalNotificationTrigger") triggerWithTimeInterval:interval repeats:repeats];
-            UNNotificationRequest *request = [objc_getClass("UNNotificationRequest") requestWithIdentifier:bundleId
+            UNNotificationRequest *request = [objc_getClass("UNNotificationRequest") requestWithIdentifier:[[NSUUID UUID] UUIDString]
                                                                                                    content:objNotificationContent trigger:trigger];
             [center addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
                 if (!error) {
