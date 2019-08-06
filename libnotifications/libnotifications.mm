@@ -22,23 +22,6 @@
 
 #define CPLog(fmt, ...) NSLog((@"\e[4#1mCPNotification\e[m \E[3#2m[Line %d]:\e[m " fmt), __LINE__, ##__VA_ARGS__);
 
-static NSString * toBase64String(NSString *string) {
-    NSData *dataToEncode = [string dataUsingEncoding:NSUTF8StringEncoding];
-    NSData *encodedData = [dataToEncode base64EncodedDataWithOptions:0];
-    NSString *encodedString = [[NSString alloc] initWithData:encodedData encoding:NSUTF8StringEncoding];
-    return encodedString;
-}
-
-static NSString * fromBase64String(NSString *string) {
-    NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:string options:0];
-    NSString *decodedString = [[NSString alloc] initWithData:decodedData encoding:NSUTF8StringEncoding];
-    return decodedString;
-}
-
-@interface NSTask : NSObject
-+ (NSTask *)launchedTaskWithLaunchPath:(NSString *)path arguments:(NSArray *)arguments;
-@end
-
 @interface CPNotification : NSObject
 + (void)showAlertWithTitle:(NSString*)title message:(NSString*)message userInfo:(NSDictionary*)userInfo badgeCount:(int)badgeCount soundName:(NSString*)soundName delay:(double)delay repeats:(BOOL)repeats bundleId:(nonnull NSString*)bundleId;
 @end
