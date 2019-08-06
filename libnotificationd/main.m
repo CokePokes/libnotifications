@@ -76,28 +76,36 @@ static void showNotificationWithXPCObject(xpc_object_t object) {
                 }
             }];
             
-            UNMutableNotificationContent *objNotificationContent = [[objc_getClass("UNMutableNotificationContent") alloc] init];
+            UNMutableNotificationContent *content = [[objc_getClass("UNMutableNotificationContent") alloc] init];
             if (title)
-                objNotificationContent.title = title;
+                content.title = title;
             if (message)
-                objNotificationContent.body = message;
+                content.body = message;
             if (soundName)
-                objNotificationContent.sound = [objc_getClass("UNNotificationSound") soundNamed:soundName];
+                content.sound = [objc_getClass("UNNotificationSound") soundNamed:soundName];
             else
-                objNotificationContent.sound = [objc_getClass("UNNotificationSound") defaultSound];
+                content.sound = [objc_getClass("UNNotificationSound") defaultSound];
             if (userInfo)
-                objNotificationContent.userInfo = userInfo;
+                content.userInfo = userInfo;
             if (badgeCount)
-                objNotificationContent.badge = badgeCount;
+                content.badge = badgeCount;
             if (!delay || delay == 0) // delay cannot be 0, framework will complain and crash
                 delay = 1.00;
             if (delay < 60.00 && repeats)
                 delay = 60.00;
             
+            if (@available(iOS 11.0, *)) {
+                //UNTextInputNotificationAction *action = [objc_getClass("UNTextInputNotificationAction") actionWithIdentifier:@"Reply" title:@"Reply" options:UNNotificationActionOptionNone textInputButtonTitle:@"Send" textInputPlaceholder:@""]; //make this an option?
+                UNNotificationCategory *showTitleCategory = [objc_getClass("UNNotificationCategory") categoryWithIdentifier:@"actionCategory" actions:@[/*action*/] intentIdentifiers:@[] options:UNNotificationCategoryOptionHiddenPreviewsShowTitle];
+                [center setNotificationCategories:[NSSet setWithObject:showTitleCategory]];
+                content.threadIdentifier = bundleId;
+                //content.categoryIdentifier = @"actionCategory";
+            }
+            
             NSTimeInterval interval = delay; //make this an option maybe
             UNTimeIntervalNotificationTrigger *trigger = [objc_getClass("UNTimeIntervalNotificationTrigger") triggerWithTimeInterval:interval repeats:repeats];
             UNNotificationRequest *request = [objc_getClass("UNNotificationRequest") requestWithIdentifier:[[NSUUID UUID] UUIDString]
-                                                                                                   content:objNotificationContent trigger:trigger];
+                                                                                                   content:content trigger:trigger];
             [center addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
                 if (!error) {
                     CPLog(@"Local Notification succeeded");
