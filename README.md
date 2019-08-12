@@ -37,7 +37,7 @@ The app must have notification privileges. To do this you can add this BOOL to t
 ```
 
 OR you can request notification priveleges in the app by calling:
-```
+```objc
 #import <UserNotifications/UserNotifications.h>
 
 if (@available(iOS 10.0, *)) {
