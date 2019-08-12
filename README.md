@@ -29,3 +29,24 @@ if (handle != NULL) {
 }
 	
 ```
+
+The app must have notification privileges. To do this you can add this BOOL to the Info.plist file for an app in /Applications: 
+```
+<key>SBAppUsesLocalNotifications</key>
+<true/>
+```
+
+OR you can request notification priveleges in the app by calling:
+```
+#import <UserNotifications/UserNotifications.h>
+
+if (@available(iOS 10.0, *)) {
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    UNAuthorizationOptions options = UNAuthorizationOptionAlert + UNAuthorizationOptionSound;
+    [center requestAuthorizationWithOptions:options completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        if (!granted) {
+            NSLog(@"Something went wrong");
+        }
+    }];
+}
+
