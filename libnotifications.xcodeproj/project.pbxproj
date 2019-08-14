@@ -35,6 +35,7 @@
 		B56F74CB22F6E1CD004E453F /* NSNumber+CDXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F74B422F6E1CD004E453F /* NSNumber+CDXPC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-objc-designated-initializers"; }; };
 		B56F74CC22F6E5B2004E453F /* SpringBoardServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B56F73F722F455B5004E453F /* SpringBoardServices.framework */; };
 		B56F74CE22F702ED004E453F /* ObjectToXPC-Private.h in Headers */ = {isa = PBXBuildFile; fileRef = B56F74CD22F702ED004E453F /* ObjectToXPC-Private.h */; };
+		B5DF47392304B2B40011EC56 /* Headers.h in Headers */ = {isa = PBXBuildFile; fileRef = B5DF47382304B2B40011EC56 /* Headers.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,7 @@
 		B56F74B322F6E1CD004E453F /* NSArray+CDXPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+CDXPC.m"; sourceTree = "<group>"; };
 		B56F74B422F6E1CD004E453F /* NSNumber+CDXPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+CDXPC.m"; sourceTree = "<group>"; };
 		B56F74CD22F702ED004E453F /* ObjectToXPC-Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ObjectToXPC-Private.h"; sourceTree = "<group>"; };
+		B5DF47382304B2B40011EC56 /* Headers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Headers.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 		B51C438622F9ADB30069559B /* libnotificationd */ = {
 			isa = PBXGroup;
 			children = (
+				B5DF47382304B2B40011EC56 /* Headers.h */,
 				B51C438722F9ADB30069559B /* main.m */,
 				B51C438822F9ADB30069559B /* monkeydev.entitlements */,
 				B51C438922F9ADB30069559B /* libnotificationd-Prefix.pch */,
@@ -241,6 +244,7 @@
 				B56F74CE22F702ED004E453F /* ObjectToXPC-Private.h in Headers */,
 				B56F74C722F6E1CD004E453F /* NSDate+CDXPC.h in Headers */,
 				B56F74C322F6E1CD004E453F /* NSDictionary+CDXPC.h in Headers */,
+				B5DF47392304B2B40011EC56 /* Headers.h in Headers */,
 				B56F74C622F6E1CD004E453F /* NSNull+CDXPC.h in Headers */,
 				B56F74BE22F6E1CD004E453F /* NSNumber+CDXPC.h in Headers */,
 			);
@@ -481,7 +485,7 @@
 				MonkeyDevBuildPackageOnAnyBuild = YES;
 				MonkeyDevClearUiCacheOnInstall = NO;
 				MonkeyDevCopyOnBuild = NO;
-				MonkeyDevDeviceIP = 192.168.1.3;
+				MonkeyDevDeviceIP = 192.168.1.8;
 				MonkeyDevDevicePassword = "";
 				MonkeyDevDevicePort = "";
 				MonkeyDevInstallOnAnyBuild = YES;
@@ -513,7 +517,7 @@
 				MonkeyDevBuildPackageOnAnyBuild = YES;
 				MonkeyDevClearUiCacheOnInstall = NO;
 				MonkeyDevCopyOnBuild = NO;
-				MonkeyDevDeviceIP = 192.168.1.3;
+				MonkeyDevDeviceIP = 192.168.1.8;
 				MonkeyDevDevicePassword = "";
 				MonkeyDevDevicePort = "";
 				MonkeyDevInstallOnAnyBuild = YES;

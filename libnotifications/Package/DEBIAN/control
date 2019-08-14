@@ -2,7 +2,7 @@ Name: libnotifications
 Package: com.cokepokes.libnotifications
 Priority: optional
 Depends: firmware (>= 8.0)
-Version: 0.2-2
+Version: 0.2-3
 Architecture: iphoneos-arm
 Description: App notification library.
 Homepage: http://moreinfo.thebigboss.org/moreinfo/depiction.php?file=libnotificationsDp
