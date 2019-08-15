@@ -3,7 +3,7 @@ App Notification Library for Jailbroken Devices
 
 `Requires iOS10+`
 
-This must be used in a process with privileges. You can set up a rocketbootstrap server in SpringBoard if you're using in a sandboxed process & run this code there. 
+This library can be used in a process or a tweak. You can set up a rocketbootstrap server in SpringBoard if you're using in a sandboxed process & run this code there. 
 
 How to use in your tweak:
 
