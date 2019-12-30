@@ -92,7 +92,14 @@ static void showNotificationWithXPCObject(xpc_object_t object) {
             
             LSApplicationProxy *bundleProxy = [objc_getClass("LSApplicationProxy") applicationProxyForIdentifier:bundleId withContext:[objc_getClass("LSContext") currentContext]];
 
-            UNUserNotificationCenter *center = [[objc_getClass("UNUserNotificationCenter") alloc] initWithBundleProxy:bundleProxy]; //currentUserNotificationSettings crashes
+            UNUserNotificationCenter *center = [objc_getClass("UNUserNotificationCenter") alloc]; //currentUserNotificationSettings crashes
+            
+            if ([center respondsToSelector:@selector(initWithBundleProxy:)]){
+                center = [center initWithBundleProxy:bundleProxy];
+            } else if ([center respondsToSelector:@selector(initWithBundleIdentifier:)]){ //ios13+
+                center = [center initWithBundleIdentifier:bundleId];
+            }
+            
             UNAuthorizationOptions options = UNAuthorizationOptionAlert|UNAuthorizationOptionSound|UNAuthorizationOptionBadge;
             [center requestAuthorizationWithOptions:options completionHandler:^(BOOL granted, NSError * _Nullable error){
                 if(!error){
@@ -104,39 +111,67 @@ static void showNotificationWithXPCObject(xpc_object_t object) {
                         NSString *directory = @"/var/mobile/Library/UserNotifications";
                         FBSSystemService *sbservice = [objc_getClass("FBSSystemService") sharedService];
                         UNSLocationMonitor *locationMon = [[objc_getClass("UNSLocationMonitor") alloc] init];
-                        UNSApplicationLauncher *appLauncher = [[objc_getClass("UNSApplicationLauncher") alloc] initWithSystemService:sbservice locationMonitor:locationMon];
+                        UNSApplicationLauncher *appLauncher = [objc_getClass("UNSApplicationLauncher") alloc];
+                        
+                        if ([appLauncher respondsToSelector:@selector(initWithSystemService:locationMonitor:)]){
+                            appLauncher = [appLauncher initWithSystemService:sbservice locationMonitor:locationMon]; //<=12
+                        } else if ([appLauncher respondsToSelector:@selector(initWithLocationMonitor:)]){
+                            appLauncher = [appLauncher initWithLocationMonitor:locationMon]; //ios13+
+                        }
                         
                         UNSNotificationCategoryRepository *catRepo = [objc_getClass("UNSNotificationCategoryRepository") alloc];
-                        if ([catRepo respondsToSelector:@selector(initWithDirectory:)]) { //iOS12+
+                        if ([catRepo respondsToSelector:@selector(initWithDirectory:librarian:repositoryProtectionStrategy:)]){ //iOS13+
+                            UNSBundleLibrarian *bundleLibrarian = [[objc_getClass("UNSBundleLibrarian") alloc] initWithDirectory:directory];
+                            UNSFileHandleContentProtectionStrategy *protectionStrat = [[objc_getClass("UNSFileHandleContentProtectionStrategy") alloc] initWithFileProtectionType:NSFileProtectionNone];
+                            catRepo = [catRepo initWithDirectory:directory librarian:bundleLibrarian repositoryProtectionStrategy:protectionStrat];
+                        } else if ([catRepo respondsToSelector:@selector(initWithDirectory:)]) { //iOS12+
                             catRepo = [catRepo initWithDirectory:directory];
                         } else if ([catRepo respondsToSelector:@selector(init)]) { //<= iOS11
                             catRepo = [catRepo init];
                         }
                     
                         UNSNotificationRepository *notificationRepo = [objc_getClass("UNSNotificationRepository") alloc];
-                        if ([notificationRepo respondsToSelector:@selector(initWithDirectory:)]) { //iOS12+
+                        if ([notificationRepo respondsToSelector:@selector(initWithDirectory:librarian:repositoryProtectionStrategy:)]){ //iOS13+
+                            UNSBundleLibrarian *bundleLibrarian = [[objc_getClass("UNSBundleLibrarian") alloc] initWithDirectory:directory];
+                            UNSFileHandleContentProtectionStrategy *protectionStrat = [[objc_getClass("UNSFileHandleContentProtectionStrategy") alloc] initWithFileProtectionType:NSFileProtectionNone];
+                            notificationRepo = [notificationRepo initWithDirectory:directory librarian:bundleLibrarian repositoryProtectionStrategy:protectionStrat];
+                        } else if ([notificationRepo respondsToSelector:@selector(initWithDirectory:)]) { //iOS12+
                             notificationRepo = [notificationRepo initWithDirectory:directory];
                         } else if ([notificationRepo respondsToSelector:@selector(initWithSystemService:)]) { //<= iOS11
                             notificationRepo = [notificationRepo initWithSystemService:sbservice];
                         }
                         
                         UNSAttachmentsRepository *attachRepo = [objc_getClass("UNSAttachmentsRepository") alloc];
-                        if ([attachRepo respondsToSelector:@selector(initWithDirectory:)]) { //iOS12+
+                        if ([attachRepo respondsToSelector:@selector(initWithDirectory:librarian:)]){
+                            UNSBundleLibrarian *bundleLibrarian = [[objc_getClass("UNSBundleLibrarian") alloc] initWithDirectory:directory];
+                            attachRepo = [attachRepo initWithDirectory:directory librarian:bundleLibrarian];
+                        } else if ([attachRepo respondsToSelector:@selector(initWithDirectory:)]) { //iOS12+
                             attachRepo = [attachRepo initWithDirectory:directory];
                         } else if ([attachRepo respondsToSelector:@selector(initWithDirectoryURL:)]) { //<= iOS11
                             attachRepo = [attachRepo initWithDirectoryURL:[NSURL URLWithString:directory]];
                         }
                         
                         UNSPendingNotificationRepository *pendingRepo = [objc_getClass("UNSPendingNotificationRepository") alloc];
-                        if ([pendingRepo respondsToSelector:@selector(initWithDirectory:)]){ //iOS12+
+                        if ([pendingRepo respondsToSelector:@selector(initWithDirectory:librarian:)]){ //iOS13+
+                            UNSBundleLibrarian *bundleLibrarian = [[objc_getClass("UNSBundleLibrarian") alloc] initWithDirectory:directory];
+                            UNSFileHandleContentProtectionStrategy *protectionStrat = [[objc_getClass("UNSFileHandleContentProtectionStrategy") alloc] initWithFileProtectionType:NSFileProtectionNone];
+                            pendingRepo = [pendingRepo initWithDirectory:directory librarian:bundleLibrarian repositoryProtectionStrategy:protectionStrat];
+                        } else if ([pendingRepo respondsToSelector:@selector(initWithDirectory:)]){ //iOS12+
                             pendingRepo = [pendingRepo initWithDirectory:directory];
                         } else if ([pendingRepo respondsToSelector:@selector(init)]) { //<= iOS11
                             pendingRepo = [pendingRepo init];
                         }
-                        
+
                         UNSNotificationSchedulingService *schService = [objc_getClass("UNSNotificationSchedulingService") alloc];
-                        if ([schService respondsToSelector:@selector(initWithNotificationRepository:pendingNotificationRepository:locationMonitor:)]){ //iOS12+
-                            UNSNotificationScheduleRepository *scheduleRepo = [[objc_getClass("UNSNotificationScheduleRepository") alloc] initWithDirectory:directory];
+                        if ([schService respondsToSelector:@selector(initWithNotificationRepository:pendingNotificationRepository:notificationScheduleRepository:locationMonitor:)]){ //iOS12+
+                            
+                            UNSNotificationScheduleRepository *scheduleRepo = [objc_getClass("UNSNotificationScheduleRepository") alloc];
+                            if ([scheduleRepo respondsToSelector:@selector(initWithDirectory:librarian:)]){ //iOS13+
+                                UNSBundleLibrarian *bundleLibrarian = [[objc_getClass("UNSBundleLibrarian") alloc] initWithDirectory:directory];
+                                scheduleRepo = [scheduleRepo initWithDirectory:directory librarian:bundleLibrarian];
+                            } else if ([scheduleRepo respondsToSelector:@selector(initWithDirectory:)]){ //<=iOS12
+                                scheduleRepo = [scheduleRepo initWithDirectory:directory];
+                            }
                             schService = [schService initWithNotificationRepository:notificationRepo pendingNotificationRepository:pendingRepo notificationScheduleRepository:scheduleRepo locationMonitor:locationMon];
                         } else if ([schService respondsToSelector:@selector(initWithNotificationRepository:pendingNotificationRepository:locationMonitor:)]) { //<= iOS11
                             schService = [schService initWithNotificationRepository:notificationRepo pendingNotificationRepository:pendingRepo locationMonitor:locationMon];
@@ -149,8 +184,26 @@ static void showNotificationWithXPCObject(xpc_object_t object) {
                             attachService = [attachService initWithNotificationRepository:notificationRepo notificationSchedulingService:schService pendingNotificationRepository:pendingRepo];
                         }
                         
-                        UNSDefaultDataProviderFactory*factory = [objc_getClass("UNSDefaultDataProviderFactory") alloc];
-                        if ([factory respondsToSelector:@selector(initWithApplicationLauncher:daemonLauncher:categoryRepository:notificationRepository:attachmentsService:topicRepository:)]){ //iOS12+
+                        UNSDefaultDataProviderFactory *factory = [objc_getClass("UNSDefaultDataProviderFactory") alloc];
+                        if ([factory respondsToSelector:@selector(initWithApplicationLauncher:daemonLauncher:categoryRepository:notificationRepository:attachmentsService:topicRepository:localizationService:settingsGateway:)]){ //iOS13+
+                            
+                            UNSDaemonLauncher *daemonLauncher = [[objc_getClass("UNSDaemonLauncher") alloc] init];
+                            UNSNotificationTopicRepository *topicRepo = [objc_getClass("UNSNotificationTopicRepository") alloc];
+
+                            if ([topicRepo respondsToSelector:@selector(initWithDirectory:librarian:repositoryProtectionStrategy:)]){
+                                UNSBundleLibrarian *bundleLibrarian = [[objc_getClass("UNSBundleLibrarian") alloc] initWithDirectory:directory];
+                                UNSFileHandleContentProtectionStrategy *protectionStrat = [[objc_getClass("UNSFileHandleContentProtectionStrategy") alloc] initWithFileProtectionType:NSFileProtectionNone];
+                                topicRepo = [topicRepo initWithDirectory:directory librarian:bundleLibrarian repositoryProtectionStrategy:protectionStrat];
+                            } else if ([topicRepo respondsToSelector:@selector(initWithDirectory:)]) {
+                                topicRepo = [topicRepo initWithDirectory:directory];
+                            }
+                            
+                            UNSSettingsGateway *settingsGetaway = [[objc_getClass("UNSSettingsGateway") alloc] init];
+                            UNSLocalizationService *localService = [[objc_getClass("UNSLocalizationService") alloc] init];
+                            
+                            factory = [factory initWithApplicationLauncher:appLauncher daemonLauncher:daemonLauncher categoryRepository:catRepo notificationRepository:notificationRepo attachmentsService:attachService topicRepository:topicRepo localizationService:localService settingsGateway:settingsGetaway];
+                            
+                        } else if ([factory respondsToSelector:@selector(initWithApplicationLauncher:daemonLauncher:categoryRepository:notificationRepository:attachmentsService:topicRepository:)]){ //iOS12+
                             UNSDaemonLauncher *daemonLauncher = [[objc_getClass("UNSDaemonLauncher") alloc] init];
                             UNSNotificationTopicRepository *topicRepo = [[objc_getClass("UNSNotificationTopicRepository") alloc] initWithDirectory:directory];
                             factory = [factory initWithApplicationLauncher:appLauncher daemonLauncher:daemonLauncher categoryRepository:catRepo notificationRepository:notificationRepo attachmentsService:attachService topicRepository:topicRepo];
@@ -158,14 +211,23 @@ static void showNotificationWithXPCObject(xpc_object_t object) {
                             factory = [factory initWithApplicationLauncher:appLauncher categoryRepository:catRepo notificationRepository:notificationRepo attachmentsService:attachService];
                         }
                         
-                        UNSNotificationSettingsService *settingService = [[objc_getClass("UNSNotificationSettingsService") alloc] initWithDataProviderFactory:factory];
-                        if ([settingService respondsToSelector:@selector(requestAuthorizationWithOptions:forNotificationSourceDescription:completionHandler:)]) { //iOS12+
+                        //UNSNotificationAuthorizationService
+                        if (objc_getClass("UNSNotificationAuthorizationService")){ //ios13+
+                            UNSNotificationAuthorizationService *authorizationService = [[objc_getClass("UNSNotificationAuthorizationService") alloc] initWithDataProviderFactory:factory];
                             UNSNotificationSourceDescription *sourceDescription = [objc_getClass("UNSNotificationSourceDescription") applicationSourceDescriptionWithApplication:bundleProxy];
-                            [settingService requestAuthorizationWithOptions:options forNotificationSourceDescription:sourceDescription completionHandler:nil];
-                        } else if ([settingService respondsToSelector:@selector(requestAuthorizationWithOptions:forBundleIdentifier:completionHandler:)]){ //<= iOS11
-                            [settingService requestAuthorizationWithOptions:options forBundleIdentifier:bundleId completionHandler:nil];
+
+                            [authorizationService requestAuthorizationWithOptions:options forNotificationSourceDescription:sourceDescription completionHandler:nil];
+                            
+                        } else if (objc_getClass("UNSNotificationSettingsService")){ //iOS12+
+                            UNSNotificationSettingsService *settingService = [[objc_getClass("UNSNotificationSettingsService") alloc] initWithDataProviderFactory:factory];
+                            if ([settingService respondsToSelector:@selector(requestAuthorizationWithOptions:forNotificationSourceDescription:completionHandler:)]) { //iOS12+
+                                UNSNotificationSourceDescription *sourceDescription = [objc_getClass("UNSNotificationSourceDescription") applicationSourceDescriptionWithApplication:bundleProxy];
+                                [settingService requestAuthorizationWithOptions:options forNotificationSourceDescription:sourceDescription completionHandler:nil];
+                            } else if ([settingService respondsToSelector:@selector(requestAuthorizationWithOptions:forBundleIdentifier:completionHandler:)]){ //<= iOS11
+                                [settingService requestAuthorizationWithOptions:options forBundleIdentifier:bundleId completionHandler:nil];
+                            }
                         }
-                        
+                                                
                         dlclose(usernotificationsFactoryHandle);
                     }
                 }

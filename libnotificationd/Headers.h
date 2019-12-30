@@ -133,6 +133,9 @@
 
 -(void)requestAuthorizationWithTopics:(id)arg1 forNotificationSourceDescription:(id)arg2 completionHandler:(/*^block*/id)arg3 ;
 -(void)requestCriticalAlertAuthorizationForNotificationSourceDescription:(id)arg1 completionHandler:(/*^block*/id)arg2 ;
+
+-(id)initWithSettingsGateway:(id)arg1 ; //iOS13+
+
 @end
 
 @class NSString, NSURL, NSUUID, NSArray, _LSLazyPropertyList, _LSBundleIDValidationToken, LSApplicationProxy, NSDictionary;
@@ -154,6 +157,26 @@
 
 @end
 
+@protocol OS_dispatch_queue;
+@class UNSDefaultDataProviderFactory, UNSCriticalAlertAuthorizationAlertController, UNSNotificationAuthorizationAlertController, NSObject, CRCarPlayAppPolicyEvaluator;
+
+@interface UNSNotificationAuthorizationService : NSObject {
+    
+    UNSDefaultDataProviderFactory* _dataProviderFactory;
+    UNSCriticalAlertAuthorizationAlertController* _criticalAlertAuthorizationAlertController;
+    UNSNotificationAuthorizationAlertController* _notificationAuthorizationAlertController;
+    //NSObject*<OS_dispatch_queue> _queue;
+    CRCarPlayAppPolicyEvaluator* _policyEvaluator;
+}
+-(void)_queue_requestCriticalAlertAuthorizationForNotificationSourceDescription:(id)arg1 completionHandler:(/*^block*/id)arg2 ;
+-(void)_queue_requestAuthorizationWithOptions:(unsigned long long)arg1 forNotificationSourceDescription:(id)arg2 completionHandler:(/*^block*/id)arg3 ;
+-(id)authorizedBundleIdentifiersForBundleIdentifiers:(id)arg1 ;
+-(BOOL)_queue_isCarPlayAvailableForApplication:(id)arg1 ;
+-(BOOL)_queue_isSpokenAvailableForApplication:(id)arg1 ;
+-(id)initWithDataProviderFactory:(id)arg1 ;
+-(void)requestAuthorizationWithOptions:(unsigned long long)arg1 forNotificationSourceDescription:(id)arg2 completionHandler:(/*^block*/id)arg3 ;
+-(void)requestCriticalAlertAuthorizationForNotificationSourceDescription:(id)arg1 completionHandler:(/*^block*/id)arg2 ;
+@end
 
 @class NSString, NSArray, NSNumber, _LSLazyPropertyList, NSDate, _LSDiskUsage, _LSApplicationState, NSUUID, NSProgress, NSDictionary;
 
@@ -319,6 +342,9 @@
     //NSObject*<OS_dispatch_queue> _queue;
     
 }
+
+-(id)initWithLocationMonitor:(id)arg1 ;  //ios 13+
+
 -(id)initWithSystemService:(id)arg1 locationMonitor:(id)arg2 ;
 -(void)willPresentNotification:(id)arg1 forBundleIdentifier:(id)arg2 withCompletionHandler:(/*^block*/id)arg3 ;
 -(void)foregroundLaunchApplication:(id)arg1 withResponse:(id)arg2 launchImageName:(id)arg3 origin:(id)arg4 completionHandler:(/*^block*/id)arg5 ;
@@ -375,8 +401,71 @@
 - (void)addScheduledLocalNotifications:(NSArray *)notifications waitUntilDone:(BOOL)waitUntilDone;
 @end
 
+@protocol OS_dispatch_queue;
+@class NSObject, NSMutableDictionary;
 
+@interface UNSLocalizationService : NSObject {
+    
+    //NSObject*<OS_dispatch_queue> _queue;
+    NSMutableDictionary* _bundleIdentifierToBundle;
+    NSMutableDictionary* _bundleIdentifierToBundleURL;
+}
+-(id)init;
+-(id)bundleWithIdentifier:(id)arg1 ;
+-(void)_queue_notificationSourcesDidUninstall:(id)arg1 ;
+-(void)notificationSourcesDidUninstall:(id)arg1 ;
+-(void)notificationSourcesDidInstall:(id)arg1 ;
+-(id)_queue_bundleWithIdentifier:(id)arg1 ;
+-(void)_queue_notificationSourcesDidInstall:(id)arg1 ;
+@end
 
+@protocol OS_dispatch_queue;
+@class NSMutableArray, BBSettingsGateway, BBObserver, NSObject, NSString;
+
+@interface UNSSettingsGateway : NSObject /*<BBObserverDelegate>*/ {
+    
+    NSMutableArray* _observers;
+    BBSettingsGateway* _settingsGateway;
+    BBObserver* _settingsObserver;
+    //NSObject*<OS_dispatch_queue> _queue;
+}
+@property (readonly) unsigned long long hash;
+@property (readonly) Class superclass;
+@property (copy,readonly) NSString * description;
+@property (copy,readonly) NSString * debugDescription;
+-(id)init;
+-(void)dealloc;
+-(void)addObserver:(id)arg1 ;
+-(void)removeObserver:(id)arg1 ;
+-(id)allSectionInfo;
+-(id)sectionInfoForSectionID:(id)arg1 ;
+-(id)sectionInfoForSectionIDs:(id)arg1 ;
+-(void)observer:(id)arg1 updateSectionInfo:(id)arg2 ;
+-(void)observer:(id)arg1 updateGlobalSettings:(id)arg2 ;
+-(void)getSectionInfoForSectionIDs:(id)arg1 withCompletion:(/*^block*/id)arg2 ;
+-(long long)globalContentPreviewSetting;
+-(void)setGlobalContentPreviewSetting:(long long)arg1 ;
+-(long long)globalSpokenNotificationSetting;
+-(void)setGlobalSpokenNotificationSetting:(long long)arg1 ;
+-(void)setSectionInfo:(id)arg1 forSectionID:(id)arg2 ;
+-(id)allEffectiveSectionInfo;
+-(id)effectiveSectionInfoForSectionID:(id)arg1 ;
+-(id)effectiveSectionInfoForSectionIDs:(id)arg1 ;
+-(void)_queue_addObserver:(id)arg1 ;
+-(void)_queue_removeObserver:(id)arg1 ;
+-(void)_queue_setSectionInfo:(id)arg1 forSectionID:(id)arg2 ;
+-(id)_queue_effectiveSectionInfoForSectionID:(id)arg1 ;
+-(id)_queue_sectionInfoForSectionID:(id)arg1 ;
+-(id)_queue_effectiveSectionInfosForSectionIDs:(id)arg1 ;
+-(id)_queue_sectionInfosForSectionIDs:(id)arg1 ;
+-(void)_queue_getSectionInfoForSectionIDs:(id)arg1 withCompletion:(/*^block*/id)arg2 ;
+-(id)_queue_allEffectiveSectionInfos;
+-(id)_queue_allSectionInfos;
+-(long long)_queue_globalContentPreviewSetting;
+-(void)_queue_setGlobalContentPreviewSetting:(long long)arg1 ;
+-(long long)_queue_globalSpokenNotificationSetting;
+-(void)_queue_setGlobalSpokenNotificationSetting:(long long)arg1 ;
+@end
 
 //protocol OS_dispatch_queue;
 @class NSMutableDictionary, NSMutableSet, NSMutableArray, UNSApplicationLauncher, UNSDaemonLauncher, UNSNotificationCategoryRepository, UNSNotificationRepository, UNSNotificationTopicRepository, UNSAttachmentsService, BBDataProviderConnection, BBSettingsGateway, BBObserver, NSObject, NSString;
@@ -410,6 +499,8 @@
 -(id)notificationSettingsForBundleIdentifier:(id)arg1 ;
 -(void)notificationSourcesDidInstall:(id)arg1 ;
 -(void)_queue_notificationSourcesDidInstall:(id)arg1 ;
+-(id)initWithApplicationLauncher:(id)arg1 daemonLauncher:(id)arg2 categoryRepository:(id)arg3 notificationRepository:(id)arg4 attachmentsService:(id)arg5 topicRepository:(id)arg6 localizationService:(id)arg7 settingsGateway:(id)arg8 ; //iOS13+
+
 -(id)initWithApplicationLauncher:(id)arg1 daemonLauncher:(id)arg2 categoryRepository:(id)arg3 notificationRepository:(id)arg4 attachmentsService:(id)arg5 topicRepository:(id)arg6 ; //iOS12+
 -(id)initWithApplicationLauncher:(id)arg1 categoryRepository:(id)arg2 notificationRepository:(id)arg3 attachmentsService:(id)arg4 ; // <= iOS11.99
 
@@ -557,6 +648,69 @@
 -(BOOL)isPasscodeLockedOrBlocked;
 @end
 
+
+@protocol UNSContentProtectionStrategy <NSObject>
+
+@optional
+-(void)importDataWithImportHandler:(/*^block*/id)arg1;
+@required
+-(BOOL)removeItemAtPath:(id)arg1 error:(id*)arg2;
+-(BOOL)dataIsAvailableAtPath:(id)arg1;
+-(id)dataAtPath:(id)arg1;
+-(BOOL)writeData:(id)arg1 atPath:(id)arg2 error:(id*)arg3;
+-(void)migrateDataAtPath:(id)arg1 toPath:(id)arg2;
+@end
+
+@class NSString, NSMutableDictionary;
+@interface UNSFileHandleContentProtectionStrategy : NSObject <UNSContentProtectionStrategy> {
+    
+    NSString* _fileProtectionType;
+    NSMutableDictionary* _keyedFileHandles;
+}
+//@property (readonly) unsigned long long hash;
+@property (readonly) Class superclass;
+@property (copy,readonly) NSString * description;
+@property (copy,readonly) NSString * debugDescription;
+-(BOOL)removeItemAtPath:(id)arg1 error:(id*)arg2 ;
+-(id)initWithFileProtectionType:(id)arg1 ;
+-(BOOL)dataIsAvailableAtPath:(id)arg1 ;
+-(id)dataAtPath:(id)arg1 ;
+-(BOOL)writeData:(id)arg1 atPath:(id)arg2 error:(id*)arg3 ;
+-(void)migrateDataAtPath:(id)arg1 toPath:(id)arg2 ;
+-(id)allPaths;
+-(id)allDataAtPath:(id)arg1 ;
+-(BOOL)removeAllDataAtPath:(id)arg1 error:(id*)arg2 ;
+-(id)_fileHandleForCreatingStoreAtPath:(id)arg1 protectionType:(id)arg2 ;
+-(BOOL)_isFileProtectionTypeSupported:(id)arg1 ;
+@end
+
+@protocol OS_dispatch_queue;
+@class NSString, NSMutableDictionary, NSObject;
+@interface UNSBundleLibrarian : NSObject {
+    
+    NSString* _bundleLibraryPath;
+    NSMutableDictionary* _bundleToUUIDMap;
+    NSMutableDictionary* _uuidToBundleMap;
+    //NSObject*<OS_dispatch_queue> _queue;
+}
+-(id)initWithDirectory:(id)arg1 ;
+-(void)_queue_loadBundleLibraryIfNeeded;
+-(BOOL)_queue_saveDictionary:(id)arg1 atPath:(id)arg2 ;
+-(id)_queue_bundleIdentifierForUniqueIdentifier:(id)arg1 ;
+-(id)_queue_uniqueIdentifierForBundleIdentifier:(id)arg1 ;
+-(void)_queue_removeEntryForBundleIdentifier:(id)arg1 ;
+-(void)_queue_addEntryForBundleIdentifier:(id)arg1 uniqueIdentifier:(id)arg2 ;
+-(void)_queue_loadBundleLibrary;
+-(id)_queue_dictionaryAtPath:(id)arg1 ;
+-(id)_queue_dataAtPath:(id)arg1 ;
+-(void)bootstrapLibraryForBundleIdentifiers:(id)arg1 ;
+-(id)bundleIdentifierForUniqueIdentifier:(id)arg1 ;
+-(id)uniqueIdentifierForBundleIdentifier:(id)arg1 ;
+-(void)removeMappingForBundleIdentifier:(id)arg1 ;
+-(void)migrateRepositoriesInDirectory:(id)arg1 ;
+-(void)_removeBundleLibrary;
+@end
+
 @protocol OS_dispatch_queue;
 @class UNSKeyedDataStoreRepository, UNSKeyedObservable, NSObject;
 
@@ -583,6 +737,9 @@
 -(void)setCategories:(id)arg1 forBundleIdentifier:(id)arg2 ;
 -(id)initWithDirectory:(id)arg1 ;
 -(id)init;
+
+-(id)initWithDirectory:(id)arg1 librarian:(id)arg2 repositoryProtectionStrategy:(id)arg3 ; //iOS13+
+
 @end
 
 @protocol OS_dispatch_queue, UNSNotificationRepositoryDelegate;
@@ -638,6 +795,9 @@
 -(id)initWithSystemService:(id)arg1 ; //<= iOS11
 -(void)setDelegate:(id<UNSNotificationRepositoryDelegate>)arg1 ;
 -(id<UNSNotificationRepositoryDelegate>)delegate;
+
+-(id)initWithDirectory:(id)arg1 librarian:(id)arg2 repositoryProtectionStrategy:(id)arg3 ; //iOS13+
+
 @end
 
 @protocol OS_dispatch_queue;
@@ -718,6 +878,8 @@
 -(id)referencesForBundleIdentifier:(id)arg1 ;
 -(id)initWithDirectory:(id)arg1 ; //iOS12
 -(id)initWithDirectoryURL:(id)arg1 ; //<= iOS11
+-(id)initWithDirectory:(id)arg1 librarian:(id)arg2 ; //iOS13+
+
 @end
 
 @protocol OS_dispatch_queue;
@@ -799,6 +961,8 @@
 -(void)_queue_performMigrationForBundleIdentifier:(id)arg1 ;
 -(void)removeObserver:(id)arg1 forBundleIdentifier:(id)arg2 ;
 -(id)initWithDirectory:(id)arg1 ;
+-(id)initWithDirectory:(id)arg1 librarian:(id)arg2 repositoryProtectionStrategy:(id)arg3 ; //iOS13+
+
 @end
 
 @protocol OS_dispatch_queue;
@@ -823,6 +987,9 @@
 -(void)removeScheduleForBundleIdentifier:(id)arg1 ;
 -(id)initWithDirectory:(id)arg1 ;
 -(id)_dateFormatter;
+
+-(id)initWithDirectory:(id)arg1 librarian:(id)arg2 ; //iOS13+
+
 @end
 
 @protocol OS_dispatch_queue;
@@ -847,6 +1014,8 @@
 -(id)_queue_topicsForBundleIdentifier:(id)arg1 ;
 -(void)_queue_setTopics:(id)arg1 forBundleIdentifier:(id)arg2 ;
 -(id)initWithDirectory:(id)arg1 ;
+-(id)initWithDirectory:(id)arg1 librarian:(id)arg2 repositoryProtectionStrategy:(id)arg3 ; //iOS13+
+
 @end
 
 @class NSString, NSURL, NSArray, UNSNotificationSourceSettingsDescription;
