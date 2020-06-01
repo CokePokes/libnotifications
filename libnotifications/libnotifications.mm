@@ -24,6 +24,8 @@
 
 @interface CPNotification : NSObject
 + (void)showAlertWithTitle:(NSString*)title message:(NSString*)message userInfo:(NSDictionary*)userInfo badgeCount:(int)badgeCount soundName:(NSString*)soundName delay:(double)delay repeats:(BOOL)repeats bundleId:(nonnull NSString*)bundleId;
++ (void)showAlertWithTitle:(NSString*)title message:(NSString*)message userInfo:(NSDictionary*)userInfo badgeCount:(int)badgeCount soundName:(NSString*)soundName delay:(double)delay repeats:(BOOL)repeats bundleId:(nonnull NSString*)bundleId uuid:(NSString*)uuid silent:(BOOL)silent;
++ (void)hideAlertWithBundleId:(NSString *)bundleId uuid:(NSString*)uuid;
 @end
 
 @implementation CPNotification
@@ -34,6 +36,21 @@
 }
 
 + (void)showAlertWithTitle:(NSString*)title message:(NSString*)message userInfo:(NSDictionary*)userInfo badgeCount:(int)badgeCount soundName:(NSString*)soundName delay:(double)delay repeats:(BOOL)repeats bundleId:(nonnull NSString*)bundleId {
+    [CPNotification showAlertWithTitle:title
+                               message:message
+                              userInfo:userInfo
+                            badgeCount:badgeCount
+                             soundName:soundName
+                                 delay:delay
+                               repeats:repeats
+                              bundleId:bundleId
+                                  uuid:[[NSUUID UUID] UUIDString]
+                                silent:NO];
+}
+
+
+
++ (void)showAlertWithTitle:(NSString*)title message:(NSString*)message userInfo:(NSDictionary*)userInfo badgeCount:(int)badgeCount soundName:(NSString*)soundName delay:(double)delay repeats:(BOOL)repeats bundleId:(nonnull NSString*)bundleId uuid:(NSString*)uuid silent:(BOOL)silent {
     
     NSMutableDictionary *constructedDic = [NSMutableDictionary dictionary];
     
@@ -63,6 +80,13 @@
     else
         return; //don't proceed. BundleId is required!
     
+    if (uuid)
+        [constructedDic setObject:uuid forKey:@"uuid"];
+
+    [constructedDic setObject:@(silent) forKey:@"isSilent"];
+    
+    [constructedDic setObject:@(NO) forKey:@"isHideAlert"];
+    
     xpc_connection_t client = xpc_connection_create_mach_service("com.cokepokes.libnotificationd",
                                                                  NULL,
                                                                  0);
@@ -70,7 +94,31 @@
         CPLog(@"ERROR: xpc_connection_set_event_handler");
     });
     xpc_connection_resume(client);
-    //xpc_object_t reply = xpc_connection_send_message_with_reply_sync(client, dictToSend.XPCObject); //could set up a completion with this
+    xpc_connection_send_message(client, [(NSDictionary*)constructedDic.copy XPCObject]);
+}
+
+
++ (void)hideAlertWithBundleId:(NSString *)bundleId uuid:(NSString*)uuid {
+    NSMutableDictionary *constructedDic = [NSMutableDictionary dictionary];
+    [constructedDic setObject:@(YES) forKey:@"isHideAlert"];
+    
+    if (uuid)
+        [constructedDic setObject:uuid forKey:@"uuid"];
+    else
+        return;
+
+    if (bundleId)
+        [constructedDic setObject:bundleId forKey:@"bundleId"];
+    else
+        return;
+    
+    xpc_connection_t client = xpc_connection_create_mach_service("com.cokepokes.libnotificationd",
+                                                                 NULL,
+                                                                 0);
+    xpc_connection_set_event_handler(client, ^(xpc_object_t event) {
+        CPLog(@"ERROR: xpc_connection_set_event_handler");
+    });
+    xpc_connection_resume(client);
     xpc_connection_send_message(client, [(NSDictionary*)constructedDic.copy XPCObject]);
 }
 

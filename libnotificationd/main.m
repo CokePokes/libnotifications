@@ -29,18 +29,69 @@
 
 extern mach_port_t SBSSpringBoardServerPort();
 
-static void showNotificationWithXPCObject(xpc_object_t object) {
-    
-    NSDictionary *dic = [NSDictionary dictionaryWithXPCObject:object];
-    
+static void hideNotification(NSDictionary *dic ) {
+    BOOL shouldDelay = NO; //taken from CReporter
+    mach_port_t port;
+    while ((port = SBSSpringBoardServerPort()) == 0) {
+        [NSThread sleepForTimeInterval:1.0];
+        shouldDelay = YES;
+    }
+
+    NSString *uuid = [dic objectForKey:@"uuid"];
+    NSString *bundleId = [dic objectForKey:@"bundleId"];
+
+    void *uikitHandle = dlopen("/System/Library/Frameworks/UIKit.framework/UIKit", RTLD_LAZY);
+    if (uikitHandle != NULL) {
+        if ([objc_getClass("SBSLocalNotificationClient") respondsToSelector:@selector(scheduleLocalNotification:bundleIdentifier:)]) //less than iOS9
+        {
+            //TODO:
+            dlclose(uikitHandle);
+            return;
+        }
+        
+        if (SYSTEM_VERSION_LESS_THAN(@"10.0")){ // iOS9 - 9.9
+            void *userNotiServicesHandle = dlopen("/System/Library/PrivateFrameworks/UserNotificationServices.framework/UserNotificationServices", RTLD_LAZY);
+            if (userNotiServicesHandle != NULL) {
+                //TODO:
+                dlclose(userNotiServicesHandle);
+                dlclose(uikitHandle);
+                return;
+            }
+        }
+        
+        void *usernotificationsHandle = dlopen("/System/Library/Frameworks/UserNotifications.framework/UserNotifications", RTLD_LAZY);
+        if (usernotificationsHandle != NULL) {
+            
+            LSApplicationProxy *bundleProxy = [objc_getClass("LSApplicationProxy") applicationProxyForIdentifier:bundleId withContext:[objc_getClass("LSContext") currentContext]];
+
+            UNUserNotificationCenter *center = [objc_getClass("UNUserNotificationCenter") alloc]; //currentUserNotificationSettings crashes
+            
+            if ([center respondsToSelector:@selector(initWithBundleProxy:)]){
+                center = [center initWithBundleProxy:bundleProxy];
+            } else if ([center respondsToSelector:@selector(initWithBundleIdentifier:)]){ //ios13+
+                center = [center initWithBundleIdentifier:bundleId];
+            }
+            
+            [center removeDeliveredNotificationsWithIdentifiers:@[uuid]];
+            CPLog(@"Local Notification removed");
+            
+            dlclose(usernotificationsHandle);
+        }
+    }
+    dlclose(uikitHandle);
+}
+
+static void showNotification(NSDictionary *dic ) {
     NSString *title = [dic objectForKey:@"title"];
     NSString *message = [dic objectForKey:@"message"];
     NSDictionary *userInfo = [dic objectForKey:@"userInfo"];
     NSNumber *badgeCount = [dic objectForKey:@"badgeCount"];
     NSString *soundName = [dic objectForKey:@"soundName"];
     NSString *bundleId = [dic objectForKey:@"bundleId"];
+    NSString *uuid = [dic objectForKey:@"uuid"];
     double delay = [[dic objectForKey:@"delay"] doubleValue];
     BOOL repeats = [[dic objectForKey:@"repeats"] boolValue];
+    BOOL isSilent = [[dic objectForKey:@"isSilent"] boolValue];
 
 
     BOOL shouldDelay = NO; //taken from CReporter
@@ -66,7 +117,9 @@ static void showNotificationWithXPCObject(xpc_object_t object) {
         [notification setAlertBody:message];
         [notification setUserInfo:userInfo];
         [notification setApplicationIconBadgeNumber:badgeCount.integerValue];
-        [notification setSoundName:soundName];
+        if(!isSilent) {
+            [notification setSoundName:soundName];
+        }
         [notification setHasAction:YES];
         [notification setAlertAction:nil];
         
@@ -238,10 +291,13 @@ static void showNotificationWithXPCObject(xpc_object_t object) {
                 content.title = title;
             if (message)
                 content.body = message;
-            if (soundName)
-                content.sound = [objc_getClass("UNNotificationSound") soundNamed:soundName];
-            else
-                content.sound = [objc_getClass("UNNotificationSound") defaultSound];
+            if(!isSilent) {
+                if (soundName) {
+                    content.sound = [objc_getClass("UNNotificationSound") soundNamed:soundName];
+                } else {
+                    content.sound = [objc_getClass("UNNotificationSound") defaultSound];
+                }
+            }
             if (userInfo)
                 content.userInfo = userInfo;
             if (badgeCount)
@@ -261,7 +317,7 @@ static void showNotificationWithXPCObject(xpc_object_t object) {
             
             NSTimeInterval interval = delay; //make this an option maybe
             UNTimeIntervalNotificationTrigger *trigger = [objc_getClass("UNTimeIntervalNotificationTrigger") triggerWithTimeInterval:interval repeats:repeats];
-            UNNotificationRequest *request = [objc_getClass("UNNotificationRequest") requestWithIdentifier:[[NSUUID UUID] UUIDString]
+            UNNotificationRequest *request = [objc_getClass("UNNotificationRequest") requestWithIdentifier:uuid
                                                                                                    content:content trigger:trigger];
             [center addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
                 if (!error) {
@@ -275,6 +331,16 @@ static void showNotificationWithXPCObject(xpc_object_t object) {
         }
     }
     dlclose(uikitHandle);
+}
+
+static void handleNotificationWithXPCObject(xpc_object_t object) {
+    NSDictionary *dic = [NSDictionary dictionaryWithXPCObject:object];
+    
+    if([[dic objectForKey:@"isHideAlert"] boolValue]) {
+        hideNotification(dic);
+    } else {
+        showNotification(dic);
+    }
 }
 
 
@@ -293,7 +359,7 @@ static void libnotificationd_peer_event_handler(xpc_connection_t peer, xpc_objec
 		}
 	} else {
 		assert(type == XPC_TYPE_DICTIONARY);
-        showNotificationWithXPCObject(event);
+        handleNotificationWithXPCObject(event);
 	}
 }
 
