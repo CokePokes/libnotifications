@@ -17,17 +17,28 @@ How to use in your tweak:
 
 void *handle = dlopen("/usr/lib/libnotifications.dylib", RTLD_LAZY);
 if (handle != NULL) {                                            
-    [objc_getClass("CPNotification") showAlertWithTitle:@"Holy Smokes!"
-                                                message:@"This is the message!"
-                                               userInfo:@{@"" : @""}
-                                             badgeCount:1
-                                              soundName:@"can be nil.caff" //research UNNotificationSound
-                                                  delay:1.00 //cannot be zero & cannot be < 60 if repeats is YES
-                                                repeats:NO
-                                               bundleId:@"com.cokepokes.iNutt"];                                     
+    NSString *uid = [[NSUUID UUID] UUIDString];
+            
+            [objc_getClass("CPNotification") showAlertWithTitle:@"Holy Smokes!"
+                                                        message:@"This is the message!"
+                                                       userInfo:@{@"" : @""}
+                                                     badgeCount:1
+                                                      soundName:nil //research UNNotificationSound
+                                                          delay:1.00 //cannot be zero & cannot be < 60 if repeats is YES
+                                                        repeats:NO
+                                                       bundleId:@"com.apple.MobileSMS"
+                                                           uuid:uid //specify if you need to use hideAlertWithBundleId and store the string for later use
+                                                         silent:NO];
+					       
+					       
+					       
 	dlclose(handle);
 }
-	
+
+
+
+
+
 ```
 
 The app must have notification privileges. To do this you can add this BOOL to the Info.plist file for an app in /Applications: 
