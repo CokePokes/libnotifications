@@ -16,22 +16,25 @@ How to use in your tweak:
 + (void)hideAlertWithBundleId:(NSString *)bundleId uuid:(NSString*)uuid;
 @end
 
-void *handle = dlopen("/usr/lib/libnotifications.dylib", RTLD_LAZY);
-if (handle != NULL) {                                            
+- (void)showNotification {
+
+	void *handle = dlopen("/usr/lib/libnotifications.dylib", RTLD_LAZY);
+	if (handle != NULL) {                                            
     
-    NSString *uid = [[NSUUID UUID] UUIDString];        
-    [objc_getClass("CPNotification") showAlertWithTitle:@"Holy Smokes!"
-                                                message:@"This is the message!"
-                                               userInfo:@{@"" : @""}
-                                             badgeCount:1
-                                              soundName:nil //research UNNotificationSound
-                                                  delay:1.00 //cannot be zero & cannot be < 60 if repeats is YES
-                                                repeats:NO
-                                               bundleId:@"com.apple.MobileSMS"
-                                                   uuid:uid //specify if you need to use hideAlertWithBundleId and store the string for later use
-                                                 silent:NO];
+ 	   NSString *uid = [[NSUUID UUID] UUIDString];        
+  	  [objc_getClass("CPNotification") showAlertWithTitle:@"Holy Smokes!"
+  	                                              message:@"This is the message!"
+	                                               userInfo:@{@"" : @""}
+	                                             badgeCount:1
+	                                              soundName:nil //research UNNotificationSound
+	                                                  delay:1.00 //cannot be zero & cannot be < 60 if repeats is YES
+	                                                repeats:NO
+	                                               bundleId:@"com.apple.MobileSMS"
+	                                                   uuid:uid //specify if you need to use hideAlertWithBundleId and store the string for later use
+	                                                 silent:NO];
 					       				       
-     dlclose(handle);
+	     dlclose(handle);
+	}
 }
 
 
