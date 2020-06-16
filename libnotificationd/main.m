@@ -88,7 +88,7 @@ static void showNotification(NSDictionary *dic ) {
     NSNumber *badgeCount = [dic objectForKey:@"badgeCount"];
     NSString *soundName = [dic objectForKey:@"soundName"];
     NSString *bundleId = [dic objectForKey:@"bundleId"];
-    NSString *uuid = [dic objectForKey:@"uuid"];
+    NSString *uuid = [dic objectForKey:@"uuid"] ? [dic objectForKey:@"uuid"] : [[NSUUID UUID] UUIDString];
     double delay = [[dic objectForKey:@"delay"] doubleValue];
     BOOL repeats = [[dic objectForKey:@"repeats"] boolValue];
     BOOL isSilent = [[dic objectForKey:@"isSilent"] boolValue];
