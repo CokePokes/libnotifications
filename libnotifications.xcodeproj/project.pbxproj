@@ -33,8 +33,8 @@
 		B56F74C922F6E1CD004E453F /* NSArray+CDXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F74B322F6E1CD004E453F /* NSArray+CDXPC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-objc-designated-initializers"; }; };
 		B56F74CA22F6E1CD004E453F /* NSNumber+CDXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F74B422F6E1CD004E453F /* NSNumber+CDXPC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-objc-designated-initializers"; }; };
 		B56F74CB22F6E1CD004E453F /* NSNumber+CDXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = B56F74B422F6E1CD004E453F /* NSNumber+CDXPC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-objc-designated-initializers"; }; };
-		B56F74CC22F6E5B2004E453F /* SpringBoardServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B56F73F722F455B5004E453F /* SpringBoardServices.framework */; };
 		B56F74CE22F702ED004E453F /* ObjectToXPC-Private.h in Headers */ = {isa = PBXBuildFile; fileRef = B56F74CD22F702ED004E453F /* ObjectToXPC-Private.h */; };
+		B5C7D08025EB0F2F00F3851C /* SpringBoardServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5C7D07F25EB0F2F00F3851C /* SpringBoardServices.framework */; };
 		B5DF47392304B2B40011EC56 /* Headers.h in Headers */ = {isa = PBXBuildFile; fileRef = B5DF47382304B2B40011EC56 /* Headers.h */; };
 /* End PBXBuildFile section */
 
@@ -48,7 +48,6 @@
 		B56F73D622F43BA6004E453F /* libnotifications-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "libnotifications-Prefix.pch"; sourceTree = "<group>"; };
 		B56F73D722F43BA6004E453F /* libnotifications.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = libnotifications.mm; sourceTree = "<group>"; };
 		B56F73DC22F43BA6004E453F /* libnotifications.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = libnotifications.plist; path = Package/Library/MobileSubstrate/DynamicLibraries/libnotifications.plist; sourceTree = "<group>"; };
-		B56F73F722F455B5004E453F /* SpringBoardServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpringBoardServices.framework; path = ../../../../../opt/theos/vendor/lib/SpringBoardServices.framework; sourceTree = "<group>"; };
 		B56F73F922F498AD004E453F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B56F746722F5A7A9004E453F /* libnotificationd */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = libnotificationd; sourceTree = BUILT_PRODUCTS_DIR; };
 		B56F747822F5A866004E453F /* prerm */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = prerm; path = Package/DEBIAN/prerm; sourceTree = "<group>"; };
@@ -70,6 +69,7 @@
 		B56F74B322F6E1CD004E453F /* NSArray+CDXPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+CDXPC.m"; sourceTree = "<group>"; };
 		B56F74B422F6E1CD004E453F /* NSNumber+CDXPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+CDXPC.m"; sourceTree = "<group>"; };
 		B56F74CD22F702ED004E453F /* ObjectToXPC-Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ObjectToXPC-Private.h"; sourceTree = "<group>"; };
+		B5C7D07F25EB0F2F00F3851C /* SpringBoardServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpringBoardServices.framework; path = ../../../../../opt/theos/sdks/iPhoneOS11.2.sdk/System/Library/PrivateFrameworks/SpringBoardServices.framework; sourceTree = "<group>"; };
 		B5DF47382304B2B40011EC56 /* Headers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Headers.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,7 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B56F74CC22F6E5B2004E453F /* SpringBoardServices.framework in Frameworks */,
+				B5C7D08025EB0F2F00F3851C /* SpringBoardServices.framework in Frameworks */,
 				B56F746822F5A7AA004E453F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -128,8 +128,8 @@
 		B56F73CE22F43BA6004E453F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B5C7D07F25EB0F2F00F3851C /* SpringBoardServices.framework */,
 				B56F73F922F498AD004E453F /* UIKit.framework */,
-				B56F73F722F455B5004E453F /* SpringBoardServices.framework */,
 				B56F73CF22F43BA6004E453F /* Foundation.framework */,
 			);
 			name = Frameworks;
@@ -470,9 +470,11 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = AUYLZA5X3V;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -485,7 +487,7 @@
 				MonkeyDevBuildPackageOnAnyBuild = YES;
 				MonkeyDevClearUiCacheOnInstall = NO;
 				MonkeyDevCopyOnBuild = NO;
-				MonkeyDevDeviceIP = 192.168.1.17;
+				MonkeyDevDeviceIP = 192.168.1.95;
 				MonkeyDevDevicePassword = "";
 				MonkeyDevDevicePort = "";
 				MonkeyDevInstallOnAnyBuild = YES;
@@ -502,9 +504,11 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = AUYLZA5X3V;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -517,7 +521,7 @@
 				MonkeyDevBuildPackageOnAnyBuild = YES;
 				MonkeyDevClearUiCacheOnInstall = NO;
 				MonkeyDevCopyOnBuild = NO;
-				MonkeyDevDeviceIP = 192.168.1.17;
+				MonkeyDevDeviceIP = 192.168.1.95;
 				MonkeyDevDevicePassword = "";
 				MonkeyDevDevicePort = "";
 				MonkeyDevInstallOnAnyBuild = YES;
@@ -534,13 +538,16 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CODE_SIGNING_ALLOWED = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = AUYLZA5X3V;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/opt/theos/vendor/lib,
+					/opt/theos/sdks/iPhoneOS11.2.sdk/System/Library/PrivateFrameworks,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "libnotificationd/libnotificationd-Prefix.pch";
@@ -565,13 +572,16 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CODE_SIGNING_ALLOWED = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = AUYLZA5X3V;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/opt/theos/vendor/lib,
+					/opt/theos/sdks/iPhoneOS11.2.sdk/System/Library/PrivateFrameworks,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "libnotificationd/libnotificationd-Prefix.pch";
